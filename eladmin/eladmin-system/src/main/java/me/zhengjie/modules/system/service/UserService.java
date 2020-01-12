@@ -5,6 +5,7 @@ import me.zhengjie.modules.system.service.dto.UserDto;
 import me.zhengjie.modules.system.service.dto.UserQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +19,7 @@ public interface UserService {
 
     /**
      * 根据ID查询
+     *
      * @param id ID
      * @return /
      */
@@ -25,6 +27,7 @@ public interface UserService {
 
     /**
      * 新增用户
+     *
      * @param resources /
      * @return /
      */
@@ -32,18 +35,21 @@ public interface UserService {
 
     /**
      * 编辑用户
+     *
      * @param resources /
      */
     void update(User resources);
 
     /**
      * 删除用户
+     *
      * @param ids /
      */
     void delete(Set<Long> ids);
 
     /**
      * 根据用户名查询
+     *
      * @param userName /
      * @return /
      */
@@ -51,26 +57,30 @@ public interface UserService {
 
     /**
      * 修改密码
-     * @param username 用户名
+     *
+     * @param username        用户名
      * @param encryptPassword 密码
      */
     void updatePass(String username, String encryptPassword);
 
     /**
      * 修改头像
+     *
      * @param file 文件
      */
     void updateAvatar(MultipartFile file);
 
     /**
      * 修改邮箱
+     *
      * @param username 用户名
-     * @param email 邮箱
+     * @param email    邮箱
      */
     void updateEmail(String username, String email);
 
     /**
      * 查询全部
+     *
      * @param criteria 条件
      * @param pageable 分页参数
      * @return /
@@ -79,6 +89,7 @@ public interface UserService {
 
     /**
      * 查询全部不分页
+     *
      * @param criteria 条件
      * @return /
      */
@@ -86,6 +97,7 @@ public interface UserService {
 
     /**
      * 导出数据
+     *
      * @param queryAll 待导出的数据
      * @param response /
      * @throws IOException /
@@ -94,7 +106,17 @@ public interface UserService {
 
     /**
      * 用户自助修改资料
+     *
      * @param resources /
      */
     void updateCenter(User resources);
+
+    /**
+     * 根据用户名获取id数据
+     *
+     * @param userName
+     * @return
+     */
+    Object getUserIdByName(String userName);
+
 }
