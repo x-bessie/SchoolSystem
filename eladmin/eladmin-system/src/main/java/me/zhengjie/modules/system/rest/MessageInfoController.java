@@ -11,13 +11,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
+
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
-* @date 2020-01-08
-*/
+ * @author HUO
+ * @date 2020-01-13
+ */
 @Api(tags = "公告栏管理")
 @RestController
 @RequestMapping("/api/messageInfo")
@@ -41,23 +42,23 @@ public class MessageInfoController {
     @Log("查询公告栏")
     @ApiOperation("查询公告栏")
     @PreAuthorize("@el.check('messageInfo:list')")
-    public ResponseEntity<Object> getMessageInfos(MessageInfoQueryCriteria criteria, Pageable pageable){
-        return new ResponseEntity<>(messageInfoService.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> getMessageInfos(MessageInfoQueryCriteria criteria, Pageable pageable) {
+        return new ResponseEntity<>(messageInfoService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @PostMapping
     @Log("新增公告栏")
     @ApiOperation("新增公告栏")
     @PreAuthorize("@el.check('messageInfo:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody MessageInfo resources){
-        return new ResponseEntity<>(messageInfoService.create(resources),HttpStatus.CREATED);
+    public ResponseEntity<Object> create(@Validated @RequestBody MessageInfo resources) {
+        return new ResponseEntity<>(messageInfoService.create(resources), HttpStatus.CREATED);
     }
 
     @PutMapping
     @Log("修改公告栏")
     @ApiOperation("修改公告栏")
     @PreAuthorize("@el.check('messageInfo:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody MessageInfo resources){
+    public ResponseEntity<Object> update(@Validated @RequestBody MessageInfo resources) {
         messageInfoService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -69,5 +70,17 @@ public class MessageInfoController {
     public ResponseEntity<Object> deleteAll(@RequestBody Integer[] ids) {
         messageInfoService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * *******用户****
+     */
+
+    @Log("展示公告栏")
+    @ApiOperation("展示公告栏")
+    @GetMapping(value="/queryMessageInfo")
+    public ResponseEntity<Object> queryMessageInfo() {
+        return new ResponseEntity<>(messageInfoService.queryMessageInfo(), HttpStatus.OK);
+
     }
 }
