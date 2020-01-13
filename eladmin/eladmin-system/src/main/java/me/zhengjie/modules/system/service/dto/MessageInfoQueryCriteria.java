@@ -6,7 +6,7 @@ import me.zhengjie.annotation.Query;
 
 /**
 * @author HUO
-* @date 2020-01-08
+* @date 2020-01-13
 */
 @Data
 public class MessageInfoQueryCriteria{

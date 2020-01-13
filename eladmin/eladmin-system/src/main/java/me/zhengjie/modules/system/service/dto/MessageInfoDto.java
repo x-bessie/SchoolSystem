@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
 * @author HUO
-* @date 2020-01-08
+* @date 2020-01-13
 */
 @Data
 public class MessageInfoDto implements Serializable {
@@ -19,6 +19,12 @@ public class MessageInfoDto implements Serializable {
     /** 状态值：0 可见 1 不可见 */
     private Integer status;
 
+    /** 标题 */
+    private String title;
+
     /** 创建时间 */
-    private Timestamp createtime;
+    private Timestamp createTime;
+
+    /** 维护人 */
+    private String maintain;
 }
