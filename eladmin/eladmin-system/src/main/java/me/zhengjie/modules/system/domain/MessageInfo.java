@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
 * @author HUO
-* @date 2020-01-08
+* @date 2020-01-13
 */
 @Entity
 @Data
@@ -30,9 +30,18 @@ public class MessageInfo implements Serializable {
     @Column(name = "status")
     private Integer status;
 
+    /** 标题 */
+    @Column(name = "title",nullable = false)
+    @NotBlank
+    private String title;
+
     /** 创建时间 */
-    @Column(name = "createTime")
-    private Timestamp createtime;
+    @Column(name = "create_time")
+    private Timestamp createTime;
+
+    /** 维护人 */
+    @Column(name = "maintain")
+    private String maintain;
 
     public void copy(MessageInfo source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
