@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
 * @author HUO
-* @date 2020-01-08
+* @date 2020-01-14
 */
 public interface MessageInfoService {
 
@@ -63,4 +63,10 @@ public interface MessageInfoService {
     * @throws IOException /
     */
     void download(List<MessageInfoDto> all, HttpServletResponse response) throws IOException;
+
+    /**
+     * 用户查看公告栏
+     * @return
+     */
+    Object queryMessageInfo();
 }
