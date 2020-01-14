@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author HUO
- * @date 2020-01-13
+ * @date 2020-01-14
  */
 @Api(tags = "公告栏管理")
 @RestController
@@ -72,15 +72,12 @@ public class MessageInfoController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * *******用户****
-     */
-
-    @Log("展示公告栏")
-    @ApiOperation("展示公告栏")
-    @GetMapping(value="/queryMessageInfo")
+    @Log("用户查看公告栏")
+    @ApiOperation("用户查看公告栏")
+    @GetMapping(value = "/queryMessageInfo")
     public ResponseEntity<Object> queryMessageInfo() {
-        return new ResponseEntity<>(messageInfoService.queryMessageInfo(), HttpStatus.OK);
 
+        return new ResponseEntity<>(messageInfoService.queryMessageInfo(), HttpStatus.OK);
     }
+
 }
