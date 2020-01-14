@@ -20,13 +20,16 @@ import org.springframework.data.domain.Pageable;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * @author HUO
- * @date 2020-01-13
+ * @date 2020-01-14
  */
 @Service
 //@CacheConfig(cacheNames = "messageInfo")
@@ -104,17 +107,14 @@ public class MessageInfoServiceImpl implements MessageInfoService {
     }
 
     /**
-     * 用户：展示公告栏信息
-     *
+     * 用户查看公告栏
      * @return
      */
     @Override
     public Object queryMessageInfo() {
-//        List<Map<String, Object>> newList = new ArrayList<Map<String, Object>>();
-//        Map<String, Object> map = new HashMap<String, Object>();
         List<Map<String, Object>> list = messageInfoRepository.queryMessageInfo();
-        if (list.size() == 0) {
-            return "暂无最新公告！";
+        if (list == null) {
+            return "暂时无公告";
         }
         return list;
     }
