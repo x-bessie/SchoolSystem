@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
 * @author HUO
-* @date 2020-01-13
+* @date 2020-01-14
 */
 @Data
 public class MessageInfoDto implements Serializable {
