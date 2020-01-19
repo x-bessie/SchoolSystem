@@ -11,13 +11,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
+
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
-* @date 2020-01-09
-*/
+ * @author HUO
+ * @date 2020-01-09
+ */
 @Api(tags = "学生管理管理")
 @RestController
 @RequestMapping("/api/studentInfo")
@@ -41,23 +42,23 @@ public class StudentInfoController {
     @Log("查询学生管理")
     @ApiOperation("查询学生管理")
     @PreAuthorize("@el.check('studentInfo:list')")
-    public ResponseEntity<Object> getStudentInfos(StudentInfoQueryCriteria criteria, Pageable pageable){
-        return new ResponseEntity<>(studentInfoService.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> getStudentInfos(StudentInfoQueryCriteria criteria, Pageable pageable) {
+        return new ResponseEntity<>(studentInfoService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @PostMapping
     @Log("新增学生管理")
     @ApiOperation("新增学生管理")
     @PreAuthorize("@el.check('studentInfo:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody StudentInfo resources){
-        return new ResponseEntity<>(studentInfoService.create(resources),HttpStatus.CREATED);
+    public ResponseEntity<Object> create(@Validated @RequestBody StudentInfo resources) {
+        return new ResponseEntity<>(studentInfoService.create(resources), HttpStatus.CREATED);
     }
 
     @PutMapping
     @Log("修改学生管理")
     @ApiOperation("修改学生管理")
     @PreAuthorize("@el.check('studentInfo:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody StudentInfo resources){
+    public ResponseEntity<Object> update(@Validated @RequestBody StudentInfo resources) {
         studentInfoService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -70,4 +71,23 @@ public class StudentInfoController {
         studentInfoService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * 编写功能代码
+     */
+    @Log("根据学生学号获取个人信息")
+    @GetMapping(value = "/getStudentInfoByName")
+    @ApiOperation("根据学生学号获取个人信息")
+    public ResponseEntity<Object> getStudentInfoByName() {
+        return new ResponseEntity<>(studentInfoService.getStudentInfoByName(), HttpStatus.OK);
+    }
+
+
+    @ApiOperation("获取单个student")
+    @GetMapping(value = "/{id}")
+    @PreAuthorize("@el.check('student:list')")
+    public ResponseEntity<Object> getStudentInfoById(@PathVariable Integer id) {
+        return new ResponseEntity<>(studentInfoService.findById(id), HttpStatus.OK);
+    }
+
 }

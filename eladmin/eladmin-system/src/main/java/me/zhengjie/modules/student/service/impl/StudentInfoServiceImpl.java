@@ -1,8 +1,7 @@
 package me.zhengjie.modules.student.service.impl;
 
 import me.zhengjie.modules.student.domain.StudentInfo;
-import me.zhengjie.utils.ValidationUtil;
-import me.zhengjie.utils.FileUtil;
+import me.zhengjie.utils.*;
 import me.zhengjie.modules.student.repository.StudentInfoRepository;
 import me.zhengjie.modules.student.service.StudentInfoService;
 import me.zhengjie.modules.student.service.dto.StudentInfoDto;
@@ -17,19 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
-* @author HUO
-* @date 2020-01-09
-*/
+ * @author HUO
+ * @date 2020-01-09
+ */
 @Service
 //@CacheConfig(cacheNames = "studentInfo")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -46,22 +41,22 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     //@Cacheable
-    public Map<String,Object> queryAll(StudentInfoQueryCriteria criteria, Pageable pageable){
-        Page<StudentInfo> page = studentInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
+    public Map<String, Object> queryAll(StudentInfoQueryCriteria criteria, Pageable pageable) {
+        Page<StudentInfo> page = studentInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(studentInfoMapper::toDto));
     }
 
     @Override
     //@Cacheable
-    public List<StudentInfoDto> queryAll(StudentInfoQueryCriteria criteria){
-        return studentInfoMapper.toDto(studentInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder)));
+    public List<StudentInfoDto> queryAll(StudentInfoQueryCriteria criteria) {
+        return studentInfoMapper.toDto(studentInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     //@Cacheable(key = "#p0")
     public StudentInfoDto findById(Integer id) {
         StudentInfo studentInfo = studentInfoRepository.findById(id).orElseGet(StudentInfo::new);
-        ValidationUtil.isNull(studentInfo.getId(),"StudentInfo","id",id);
+        ValidationUtil.isNull(studentInfo.getId(), "StudentInfo", "id", id);
         return studentInfoMapper.toDto(studentInfo);
     }
 
@@ -77,7 +72,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     @Transactional(rollbackFor = Exception.class)
     public void update(StudentInfo resources) {
         StudentInfo studentInfo = studentInfoRepository.findById(resources.getId()).orElseGet(StudentInfo::new);
-        ValidationUtil.isNull( studentInfo.getId(),"StudentInfo","id",resources.getId());
+        ValidationUtil.isNull(studentInfo.getId(), "StudentInfo", "id", resources.getId());
         studentInfo.copy(resources);
         studentInfoRepository.save(studentInfo);
     }
@@ -94,7 +89,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     public void download(List<StudentInfoDto> all, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
         for (StudentInfoDto studentInfo : all) {
-            Map<String,Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("姓名", studentInfo.getName());
             map.put("性别", studentInfo.getSex());
             map.put("年龄", studentInfo.getAge());
@@ -108,9 +103,29 @@ public class StudentInfoServiceImpl implements StudentInfoService {
             map.put("父母联系方式", studentInfo.getParentnum());
             map.put("辅导员", studentInfo.getTeachername());
             map.put("导师", studentInfo.getGuiderteacher());
-            map.put(" userId",  studentInfo.getUserId());
+            map.put(" userId", studentInfo.getUserId());
+            map.put(" username",  studentInfo.getUsername());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    /**
+     * 根据登录用户信息查询学生个人信息
+     *
+     * @return
+     */
+    @Override
+    public Object getStudentInfoByName() {
+        //获取当前用户名
+        String username = SecurityUtils.getUsername();
+        System.out.println(username);
+
+        List<Map<String, Object>> list = studentInfoRepository.getStudentInfoByUserName(username);
+        if (list == null) {
+            return "请管理员添加student信息";
+        }
+
+        return list;
     }
 }

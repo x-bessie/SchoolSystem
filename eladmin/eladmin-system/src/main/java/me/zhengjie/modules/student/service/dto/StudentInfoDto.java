@@ -52,4 +52,6 @@ public class StudentInfoDto implements Serializable {
     private Long userId;
 
     private Integer id;
+
+    private String username;
 }

@@ -68,6 +68,11 @@ public class StudentInfo implements Serializable {
     @Column(name = "GuiderTeacher")
     private String guiderteacher;
 
+    @Column(name = "username",nullable = false)
+    @NotBlank
+    private String username;
+
+
     @Column(name = "user_id",nullable = false)
     @NotNull
     private Long userId;
