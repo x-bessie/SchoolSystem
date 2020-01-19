@@ -63,4 +63,10 @@ public interface StudentCourseInfoService {
     * @throws IOException /
     */
     void download(List<StudentCourseInfoDto> all, HttpServletResponse response) throws IOException;
+
+    /**
+     * 学生本人课程详细信息
+     * @return
+     */
+    Object getStudentCourseMessage();
 }

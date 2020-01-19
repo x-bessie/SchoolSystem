@@ -70,4 +70,12 @@ public class StudentCourseInfoController {
         studentCourseInfoService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @Log("查询课程：学生本人课程详细信息")
+    @ApiOperation("查询课程：学生课程详细信息")
+    @GetMapping(value="/getStudentCourseMessage")
+    public ResponseEntity<Object> getStudentCourseMessage(){
+        return new ResponseEntity<>(studentCourseInfoService.getStudentCourseMessage(),HttpStatus.OK);
+    }
 }

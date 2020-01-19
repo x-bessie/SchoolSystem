@@ -1,8 +1,7 @@
 package me.zhengjie.modules.studentCourse.service.impl;
 
 import me.zhengjie.modules.studentCourse.domain.StudentCourseInfo;
-import me.zhengjie.utils.ValidationUtil;
-import me.zhengjie.utils.FileUtil;
+import me.zhengjie.utils.*;
 import me.zhengjie.modules.studentCourse.repository.StudentCourseInfoRepository;
 import me.zhengjie.modules.studentCourse.service.StudentCourseInfoService;
 import me.zhengjie.modules.studentCourse.service.dto.StudentCourseInfoDto;
@@ -17,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
+
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;
@@ -27,9 +25,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
-* @author HUO
-* @date 2020-01-10
-*/
+ * @author HUO
+ * @date 2020-01-10
+ */
 @Service
 //@CacheConfig(cacheNames = "studentCourseInfo")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -46,22 +44,22 @@ public class StudentCourseInfoServiceImpl implements StudentCourseInfoService {
 
     @Override
     //@Cacheable
-    public Map<String,Object> queryAll(StudentCourseInfoQueryCriteria criteria, Pageable pageable){
-        Page<StudentCourseInfo> page = studentCourseInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
+    public Map<String, Object> queryAll(StudentCourseInfoQueryCriteria criteria, Pageable pageable) {
+        Page<StudentCourseInfo> page = studentCourseInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(studentCourseInfoMapper::toDto));
     }
 
     @Override
     //@Cacheable
-    public List<StudentCourseInfoDto> queryAll(StudentCourseInfoQueryCriteria criteria){
-        return studentCourseInfoMapper.toDto(studentCourseInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder)));
+    public List<StudentCourseInfoDto> queryAll(StudentCourseInfoQueryCriteria criteria) {
+        return studentCourseInfoMapper.toDto(studentCourseInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     //@Cacheable(key = "#p0")
     public StudentCourseInfoDto findById(Integer id) {
         StudentCourseInfo studentCourseInfo = studentCourseInfoRepository.findById(id).orElseGet(StudentCourseInfo::new);
-        ValidationUtil.isNull(studentCourseInfo.getId(),"StudentCourseInfo","id",id);
+        ValidationUtil.isNull(studentCourseInfo.getId(), "StudentCourseInfo", "id", id);
         return studentCourseInfoMapper.toDto(studentCourseInfo);
     }
 
@@ -77,7 +75,7 @@ public class StudentCourseInfoServiceImpl implements StudentCourseInfoService {
     @Transactional(rollbackFor = Exception.class)
     public void update(StudentCourseInfo resources) {
         StudentCourseInfo studentCourseInfo = studentCourseInfoRepository.findById(resources.getId()).orElseGet(StudentCourseInfo::new);
-        ValidationUtil.isNull( studentCourseInfo.getId(),"StudentCourseInfo","id",resources.getId());
+        ValidationUtil.isNull(studentCourseInfo.getId(), "StudentCourseInfo", "id", resources.getId());
         studentCourseInfo.copy(resources);
         studentCourseInfoRepository.save(studentCourseInfo);
     }
@@ -94,13 +92,31 @@ public class StudentCourseInfoServiceImpl implements StudentCourseInfoService {
     public void download(List<StudentCourseInfoDto> all, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
         for (StudentCourseInfoDto studentCourseInfo : all) {
-            Map<String,Object> map = new LinkedHashMap<>();
-            map.put(" studentId",  studentCourseInfo.getStudentId());
-            map.put(" courseId",  studentCourseInfo.getCourseId());
-            map.put(" pdate",  studentCourseInfo.getPdate());
-            map.put(" tearm",  studentCourseInfo.getTearm());
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put(" studentId", studentCourseInfo.getStudentId());
+            map.put(" courseId", studentCourseInfo.getCourseId());
+            map.put(" pdate", studentCourseInfo.getPdate());
+            map.put(" tearm", studentCourseInfo.getTearm());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
     }
+
+    /**
+     * 学生本人课程详细信息
+     *
+     * @return
+     */
+    @Override
+    public Object getStudentCourseMessage() {
+        //获取当前用户名
+        String username = SecurityUtils.getUsername();
+        System.out.println(username);
+        List<Map<String, Object>> list = studentCourseInfoRepository.getStudentInfoByUserName(username);
+        if (list == null) {
+            return "当前学年无课程!";
+        }
+        return list;
+    }
+
 }
