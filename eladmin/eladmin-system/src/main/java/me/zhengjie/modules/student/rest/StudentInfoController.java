@@ -4,6 +4,7 @@ import me.zhengjie.aop.log.Log;
 import me.zhengjie.modules.student.domain.StudentInfo;
 import me.zhengjie.modules.student.service.StudentInfoService;
 import me.zhengjie.modules.student.service.dto.StudentInfoQueryCriteria;
+import org.hibernate.annotations.Parameter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +74,7 @@ public class StudentInfoController {
     }
 
     /**
-     * 编写功能代码
+     * 根据学生学号获取个人信息
      */
     @Log("根据学生学号获取个人信息")
     @GetMapping(value = "/getStudentInfoByName")
@@ -90,4 +91,21 @@ public class StudentInfoController {
         return new ResponseEntity<>(studentInfoService.findById(id), HttpStatus.OK);
     }
 
+    @Log("更新个人信息2")
+    @ApiOperation("更新个人信息2")
+    @PostMapping(value = "/updateStudentInfos")
+    public ResponseEntity<Object> updateStudentInfos(
+//            @RequestParam("age") Integer age,
+                                                     @RequestParam("IDNum") String IDNum,
+                                                     @RequestParam("address") String address,
+                                                     @RequestParam("email") String email,
+                                                     @RequestParam("Hobby") String Hobby,
+                                                     @RequestParam("parent_name") String parent_name,
+                                                     @RequestParam("parent_num") String parent_num,
+                                                     @RequestParam("tell_num") Integer tell_num,
+                                                     @RequestParam("username") String username
+    ) {
+        studentInfoService.updateStudentInfos( IDNum, address, email, Hobby, parent_name, parent_num, tell_num, username);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

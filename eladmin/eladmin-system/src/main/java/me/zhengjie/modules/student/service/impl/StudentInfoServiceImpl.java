@@ -104,7 +104,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
             map.put("辅导员", studentInfo.getTeachername());
             map.put("导师", studentInfo.getGuiderteacher());
             map.put(" userId", studentInfo.getUserId());
-            map.put(" username",  studentInfo.getUsername());
+            map.put(" username", studentInfo.getUsername());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
@@ -125,7 +125,25 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         if (list == null) {
             return "请管理员添加student信息";
         }
-
         return list;
     }
+
+    /**
+     * 参数提交个人信息更新
+     *
+     * @param idNum
+     * @param address
+     * @param email
+     * @param hobby
+     * @param parent_name
+     * @param parent_num
+     * @param username
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, Integer tell_num,String username) {
+        studentInfoRepository.updateStudentInfos(idNum, address, email, hobby, parent_name, parent_num,tell_num, username);
+
+    }
+
 }

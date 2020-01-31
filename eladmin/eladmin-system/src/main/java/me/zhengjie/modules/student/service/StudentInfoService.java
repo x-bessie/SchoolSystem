@@ -69,4 +69,17 @@ public interface StudentInfoService {
      * @return
      */
     Object getStudentInfoByName();
+
+    /**
+     * 用户更新个人信息
+     * @param idNum
+     * @param address
+     * @param email
+     * @param hobby
+     * @param parent_name
+     * @param parent_num
+     * @param tell_num
+     * @param username
+     */
+    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num,Integer tell_num, String username);
 }
