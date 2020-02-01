@@ -15,7 +15,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-10
 */
 @Api(tags = "课程：学生课程管理")
