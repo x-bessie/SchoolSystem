@@ -102,7 +102,7 @@ public class StudentInfoController {
                                                      @RequestParam("Hobby") String Hobby,
                                                      @RequestParam("parent_name") String parent_name,
                                                      @RequestParam("parent_num") String parent_num,
-                                                     @RequestParam("tell_num") Integer tell_num,
+                                                     @RequestParam("tell_num") String tell_num,
                                                      @RequestParam("username") String username
     ) {
         studentInfoService.updateStudentInfos( IDNum, address, email, Hobby, parent_name, parent_num, tell_num, username);

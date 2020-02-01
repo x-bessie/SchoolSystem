@@ -40,5 +40,5 @@ public interface StudentInfoRepository extends JpaRepository<StudentInfo, Intege
      */
     @Modifying
     @Query(value = "update student_info set  IDNum=?1, address=?2, email=?3,Hobby=?4,parent_name=?5,parent_num=?6, tell_num=?7 where username=?8 ", nativeQuery = true)
-    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num, Integer tell_num, String username);
+    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num, String username);
 }

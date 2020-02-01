@@ -50,7 +50,7 @@ public class StudentInfo implements Serializable {
 
     /** 联系方式 */
     @Column(name = "TellNum")
-    private Integer tellnum;
+    private String tellnum;
 
     /** 父母名称 */
     @Column(name = "ParentName")

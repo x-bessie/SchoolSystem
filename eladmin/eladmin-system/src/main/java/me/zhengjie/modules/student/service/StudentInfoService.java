@@ -81,5 +81,5 @@ public interface StudentInfoService {
      * @param tell_num
      * @param username
      */
-    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num,Integer tell_num, String username);
+    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num,String tell_num, String username);
 }

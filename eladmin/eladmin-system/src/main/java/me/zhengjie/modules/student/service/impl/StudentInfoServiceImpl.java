@@ -141,7 +141,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, Integer tell_num,String username) {
+    public void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num,String username) {
         studentInfoRepository.updateStudentInfos(idNum, address, email, hobby, parent_name, parent_num,tell_num, username);
 
     }

@@ -35,7 +35,7 @@ public class StudentInfoDto implements Serializable {
     private String hobby;
 
     /** 联系方式 */
-    private Integer tellnum;
+    private String tellnum;
 
     /** 父母名称 */
     private String parentname;
