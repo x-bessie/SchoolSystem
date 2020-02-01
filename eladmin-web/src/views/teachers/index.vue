@@ -22,15 +22,15 @@
             <el-input v-model="form.teacherid" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="form.name" style="width: 370px;" />
+            <el-input v-model="form.name" maxlength="10" show-word-limit style="width: 370px;" />
           </el-form-item>
           <el-form-item label="年龄">
             <el-input v-model="form.age" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="性别">
             <el-select v-model="form.sex" placeholder="请选择性别">
-              <el-option label="男" value="男"></el-option>
-              <el-option label="女" value="女"></el-option>
+              <el-option label="男" value="男" />
+              <el-option label="女" value="女" />
             </el-select>
           </el-form-item>
           <el-form-item label="地址">

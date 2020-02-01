@@ -2,17 +2,27 @@
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
+      <!--检索框-->
+      <el-input
+        clearable
+        placeholder="输入搜索内容"
+        style="width: 200px;"
+        class="filter-item"
+      />
       <!--对话框表单-->
       <el-dialog title="课程学生" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
-        <span>这是一段信息</span>
         <span slot="footer" class="dialog-footer">
+          <el-table ref="table" :data="studentData" stripe size="small" style="width: 100%;">
+            <el-table-column prop="student_name" label="学生姓名" width="321" />
+            <el-table-column prop="username" label="学号" width="321" />
+          </el-table>
           <el-button @click="dialogVisible = false">关闭</el-button>
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
-      <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
+      <!-- <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button> -->
       <!--表格渲染-->
-      <el-table ref="table" :data="tableData" size="small" style="width: 100%;">
+      <el-table ref="table" :data="tableData" stripe size="small" style="width: 100%;">
         <el-table-column prop="name" label="课程名称" width="180" />
         <el-table-column prop="classtime" label="课程时长(min)" width="130" />
         <el-table-column prop="class_num" label="课程时长周数" width="130" />
@@ -33,7 +43,7 @@
 </template>
 
 <script>
-import { getTeacherCourseMessage } from '@/api/teachersInfo'
+import { getTeacherCourseMessage, getTeacherCourseToSeeStudent } from '@/api/teachersInfo'
 import moment from 'moment'
 
 export default {
@@ -50,6 +60,11 @@ export default {
         tearm: '1',
         teacher_id: '',
         class_teacher: ''
+      }],
+      // 课程中的学生
+      studentData: [{
+        student_name: '',
+        username: ''
       }]
     }
   },
@@ -70,6 +85,14 @@ export default {
         .catch(_ => { })
     },
     seeStudent(index, row) {
+      this.dialogVisible = !this.dialogVisible
+
+      getTeacherCourseToSeeStudent({
+        teacher_id: row.teacher_id,
+        class_code: row.class_code
+      }).then(res => {
+        this.studentData = res
+      })
       console.log(index, row)
     },
     dateFormat:
