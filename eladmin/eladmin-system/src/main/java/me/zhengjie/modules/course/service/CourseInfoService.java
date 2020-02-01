@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-16
 */
 public interface CourseInfoService {
@@ -63,4 +63,12 @@ public interface CourseInfoService {
     * @throws IOException /
     */
     void download(List<CourseInfoDto> all, HttpServletResponse response) throws IOException;
+
+    /**
+     * 课程查询：查询授课教师
+     * @param name
+     * @param class_teacher
+     * @return
+     */
+    Object getCoruseTeacher(String name, String class_teacher);
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-16
 */
 @Api(tags = "课程管理管理")
@@ -69,5 +69,12 @@ public class CourseInfoController {
     public ResponseEntity<Object> deleteAll(@RequestBody Integer[] ids) {
         courseInfoService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getCoruseTeacher")
+    @Log("课程查询：查询授课教师")
+    @ApiOperation("课程查询：查询授课教师")
+    public ResponseEntity<Object> getCoruseTeacher(@RequestParam("name") String name ,@RequestParam("class_teacher") String class_teacher ) {
+        return new ResponseEntity<>(courseInfoService.getCoruseTeacher(name,class_teacher), HttpStatus.OK);
     }
 }

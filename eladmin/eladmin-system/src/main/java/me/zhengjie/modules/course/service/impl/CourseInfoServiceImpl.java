@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-16
 */
 @Service
@@ -108,5 +108,14 @@ public class CourseInfoServiceImpl implements CourseInfoService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public Object getCoruseTeacher(String name, String class_teacher) {
+        List<Map<String, Object>> list = courseInfoRepository.getCoruseTeacher(name,class_teacher);
+        if (list==null){
+            return "暂时无授课教师信息";
+        }
+        return list;
     }
 }
