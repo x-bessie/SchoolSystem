@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author Zheng Jie
+ * @author bessie
  * @date 2018-11-23
  */
 @Service
@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * TODO：根据用户名获取id
+     * 根据用户名获取id
      *
      * @param userName
      * @return

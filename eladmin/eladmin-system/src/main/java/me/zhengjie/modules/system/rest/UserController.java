@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author Zheng Jie
+ * @author bessie
  * @date 2018-11-23
  */
 @Api(tags = "系统：用户管理")
@@ -198,7 +198,7 @@ public class UserController {
     }
 
     /**
-     * TODO:根据username获取id的方法
+     * 根据username获取id的方法
      * 根据username获取Id
      *
      * @param userName
