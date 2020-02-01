@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-09
 */
 public interface StudentInfoService {
