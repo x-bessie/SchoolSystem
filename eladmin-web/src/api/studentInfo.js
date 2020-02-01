@@ -31,5 +31,12 @@ export function getStudentInfoByName(data) {
     data
   })
 }
+export function updateStudentInfos(data) {
+  return request({
+    url: 'api/studentInfo/updateStudentInfos',
+    method: 'post',
+    params: data
+  })
+}
 
-export default { add, edit, del, getStudentInfoByName }
+export default { add, edit, del, getStudentInfoByName, updateStudentInfos }

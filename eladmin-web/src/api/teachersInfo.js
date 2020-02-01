@@ -32,4 +32,29 @@ export function getTeacherCourseMessage(data) {
   })
 }
 
-export default { add, edit, del, getTeacherCourseMessage }
+export function getTeacherCourseToSeeStudent(data) {
+  // console.log('data', data)
+  return request({
+    url: 'api/teachersInfo/getTeacherCourseToSeeStudent',
+    method: 'get',
+    params: data
+  })
+}
+export function getTeachersInfoByUserName(data) {
+  // console.log('data', data)
+  return request({
+    url: 'api/teachersInfo/getTeachersInfoByUserName',
+    method: 'get',
+    data
+  })
+}
+export function updateTeacherInfo(data) {
+  // console.log('data', data)
+  return request({
+    url: 'api/teachersInfo/updateTeacherInfo',
+    method: 'post',
+    params: data
+  })
+}
+
+export default { add, edit, del, getTeacherCourseMessage, getTeacherCourseToSeeStudent, getTeachersInfoByUserName, updateTeacherInfo }
