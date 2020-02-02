@@ -4,16 +4,40 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <el-select v-model="query.type" clearable placeholder="类型" class="filter-item" style="width: 130px">
-          <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+        <el-input
+          v-model="query.value"
+          clearable
+          placeholder="输入搜索内容"
+          style="width: 200px;"
+          class="filter-item"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <el-select
+          v-model="query.type"
+          clearable
+          placeholder="类型"
+          class="filter-item"
+          style="width: 130px"
+        >
+          <el-option
+            v-for="item in queryTypeOptions"
+            :key="item.key"
+            :label="item.display_name"
+            :value="item.key"
+          />
         </el-select>
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
-      <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
+      <el-dialog
+        :close-on-click-modal="false"
+        :before-close="crud.cancelCU"
+        :visible.sync="crud.status.cu > 0"
+        :title="crud.status.title"
+        width="500px"
+      >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <el-form-item label="学号">
             <el-input v-model="form.username" style="width: 370px;" />
@@ -67,16 +91,24 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        size="small"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
         <el-table-column type="selection" width="55" />
-        <!--id
-        <el-table-column v-if="columns.visible('id')" prop="id" label="id" />-->
         <el-table-column v-if="columns.visible('userId')" prop="userId" label="userId">
-          <template slot-scope="scope">
-            {{ scope.row.userId }}
-          </template>
+          <template slot-scope="scope">{{ scope.row.userId }}</template>
         </el-table-column>
-        <el-table-column v-if="columns.visible('username')" prop="username" label="学号" width="100px"/>
+        <el-table-column
+          v-if="columns.visible('username')"
+          prop="username"
+          label="学号"
+          width="100px"
+        />
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
         <el-table-column v-if="columns.visible('sex')" prop="sex" label="性别" />
         <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" />
@@ -90,12 +122,14 @@
         <el-table-column v-if="columns.visible('guiderTeacher')" prop="guiderTeacher" label="导师" />
         <el-table-column v-if="columns.visible('teacherName')" prop="teacherName" label="辅导员" />
         <el-table-column v-if="columns.visible('tellNum')" prop="tellNum" label="电话" />
-        <el-table-column v-permission="['admin','studentInfo:edit','studentInfo:del']" label="操作" width="150px" align="center">
+        <el-table-column
+          v-permission="['admin','studentInfo:edit','studentInfo:del']"
+          label="操作"
+          width="150px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <udOperation
-              :data="scope.row"
-              :permission="permission"
-            />
+            <udOperation :data="scope.row" :permission="permission" />
           </template>
         </el-table-column>
       </el-table>
@@ -108,6 +142,7 @@
 <script>
 import crudStudentInfo from '@/api/studentInfo'
 import CRUD, { presenter, header, form, crud } from '@crud/crud'
+import { isvalidPhone } from '@/utils/validate'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
@@ -141,7 +176,7 @@ export default {
         userId: [
           { required: true, message: '不能为空', trigger: 'blur' }
         ],
-        username:[
+        username: [
           { required: true, message: '请输入学号', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
@@ -149,9 +184,9 @@ export default {
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
         ],
-        tellNum:[
-        { required: true, trigger: 'blur', validator: validPhone }
-      ]
+        tellNum: [
+          { required: true, trigger: 'blur', validator: validPhone }
+        ]
       },
       queryTypeOptions: [
         { key: 'name', display_name: '姓名' },
@@ -174,5 +209,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
