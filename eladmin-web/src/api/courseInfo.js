@@ -23,5 +23,12 @@ export function edit(data) {
     data
   })
 }
+export function getCoruseTeacher(data) {
+  return request({
+    url: 'api/courseInfo/getCoruseTeacher',
+    method: 'get',
+    params: data
+  })
+}
 
-export default { add, edit, del }
+export default { add, edit, del, getCoruseTeacher }
