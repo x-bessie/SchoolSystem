@@ -39,9 +39,9 @@
         width="500px"
       >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="教师id" prop="userId">
+          <!-- <el-form-item label="教师id" prop="userId">
             <el-input v-model="form.userId" style="width: 370px;" />
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="工号" prop="teacherid">
             <el-input v-model="form.teacherid" style="width: 370px;" />
           </el-form-item>
@@ -83,7 +83,7 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
-        <el-table-column v-if="columns.visible('userId')" prop="userId" label="教师id" />
+        <!-- <el-table-column v-if="columns.visible('userId')" prop="userId" label="教师id" /> -->
         <el-table-column v-if="columns.visible('teacherid')" prop="teacherid" label="工号" />
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
         <!-- <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" /> -->
@@ -131,9 +131,9 @@ export default {
         del: ['admin', 'teachersInfo:del']
       },
       rules: {
-        userId: [
-          { required: true, message: '教师id不能为空', trigger: 'blur' }
-        ],
+        // userId: [
+        //   { required: true, message: '教师id不能为空', trigger: 'blur' }
+        // ],
         name: [
           { required: true, message: '姓名不能为空', trigger: 'blur' }
         ],

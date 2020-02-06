@@ -85,7 +85,7 @@ export default {
       }).then(res => {
         this.studentData = res
       })
-      console.log(index, row)
+      // console.log(index, row)
     },
     dateFormat:
       function(row, column) {
