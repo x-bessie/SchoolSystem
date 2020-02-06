@@ -43,7 +43,10 @@
             <el-date-picker v-model="form.pdate" type="datetime" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="状态">
-            未设置字典，请手动设置 Select
+            <el-select v-model="form.status" placeholder="状态">
+              <el-option label="0 未激活" value="0" />
+              <el-option label="1 激活" value="0" />
+            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
