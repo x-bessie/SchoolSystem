@@ -103,4 +103,11 @@ public interface TeachersInfoService {
      * @param phone
      */
     void updateTeacherInfo(String idnum, String address, String phone, String teacherid);
+
+    /**
+     * 更新至教师表
+     * @param name
+     * @param teacherid
+     */
+    void InsertTeacherInfo(String name, String teacherid);
 }

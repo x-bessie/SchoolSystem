@@ -42,7 +42,8 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
      * @param username
      * @return
      */
-    @Query(value = "select * from teachers_info  WHERE user_id in ( select id from user  where username = ?1 )", nativeQuery = true)
+//    @Query(value = "select * from teachers_info  WHERE user_id in ( select id from user  where username = ?1 )", nativeQuery = true)
+    @Query(value = "select * from teachers_info  WHERE teacherid=?1", nativeQuery = true)
     List<Map<String, Object>> getTeachersInfoByUserName(String username);
 
     /**
@@ -55,4 +56,14 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
     @Modifying
     @Query(value = "update teachers_info set Idnum=?1,address=?2,phone=?3 where teacherid=?4 ", nativeQuery = true)
     void updateTeacherInfo(String idnum, String address, String phone, String teacherid);
+
+    /**
+     * 更新至教师表
+     *
+     * @param name
+     * @param teacherid
+     */
+    @Modifying
+    @Query(value = "Insert ignore  into teachers_info(name,teacherid) values (?1,?2) ", nativeQuery = true)
+    void InsertTeacherInfo(String name, String teacherid);
 }

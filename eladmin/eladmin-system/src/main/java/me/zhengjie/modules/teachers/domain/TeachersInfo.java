@@ -23,7 +23,6 @@ public class TeachersInfo implements Serializable {
 
     /** 教师工号 */
     @Column(name = "user_id",nullable = false)
-    @NotNull
     private Long userId;
 
     /** 姓名 */

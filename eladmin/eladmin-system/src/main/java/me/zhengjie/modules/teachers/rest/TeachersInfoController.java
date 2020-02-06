@@ -107,4 +107,17 @@ public class TeachersInfoController {
         teachersInfoService.updateTeacherInfo(Idnum, address, phone, teacherid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @Log("更新至教师表")
+    @ApiOperation("更新至教师表")
+    @PostMapping(value = "/InsertTeacherInfo")
+    public ResponseEntity<Object> InsertTeacherInfo(
+            @RequestParam("name") String name,
+            @RequestParam("teacherid") String teacherid
+
+    ) {
+        teachersInfoService.InsertTeacherInfo(name, teacherid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

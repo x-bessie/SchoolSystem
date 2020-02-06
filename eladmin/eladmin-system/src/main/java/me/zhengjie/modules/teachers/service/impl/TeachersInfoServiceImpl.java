@@ -170,4 +170,16 @@ public class TeachersInfoServiceImpl implements TeachersInfoService {
     public void updateTeacherInfo(String idnum, String address, String phone, String teacherid) {
         teachersInfoRepository.updateTeacherInfo(idnum, address, phone, teacherid);
     }
+
+    /**
+     * 更新至教师表
+     * @param name
+     * @param teacherid
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void InsertTeacherInfo(String name, String teacherid) {
+        teachersInfoRepository.InsertTeacherInfo(name, teacherid);
+
+    }
 }
