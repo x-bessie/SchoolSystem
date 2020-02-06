@@ -14,9 +14,9 @@ export default {
   data() {
     return {
       tableData: [{
-        create_time: '2016-05-02',
-        title: '王小虎',
-        content: '上海市普陀区金沙江路 1518 弄'
+        create_time: '2019-01-02',
+        title: '系统公告',
+        content: '系统正在更新中'
       }]
     }
   },
