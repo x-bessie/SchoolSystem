@@ -39,19 +39,22 @@
         width="500px"
       >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="学号">
+          <el-form-item label="学号" prop="username">
             <el-input v-model="form.username" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="姓名">
+          <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="性别">
-            <el-input v-model="form.sex" style="width: 370px;" />
+          <el-form-item label="性别" prop="sex">
+            <el-select v-model="form.sex" placeholder="请选择性别">
+              <el-option label="男" value="男" />
+              <el-option label="女" value="女" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="年龄">
+          <!-- <el-form-item label="年龄" prop="age">
             <el-input v-model="form.age" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="班级">
+          </el-form-item>-->
+          <el-form-item label="班级" prop="cid">
             <el-input v-model="form.cid" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="身份证">
@@ -63,26 +66,26 @@
           <el-form-item label="邮箱">
             <el-input v-model="form.email" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="兴趣爱好">
+          <el-form-item label="兴趣爱好" prop="hobby">
             <el-input v-model="form.hobby" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="userId" prop="userId">
             <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="导师">
-            <el-input v-model="form.guiderTeacher" style="width: 370px;" />
+          <el-form-item label="导师" prop="guiderteacher">
+            <el-input v-model="form.guiderteacher" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="家长姓名">
-            <el-input v-model="form.parentName" style="width: 370px;" />
+            <el-input v-model="form.parentname" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="家长电话">
-            <el-input v-model="form.parentNum" style="width: 370px;" />
+            <el-input v-model="form.parentnum" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="辅导员">
-            <el-input v-model="form.teacherName" style="width: 370px;" />
+          <el-form-item label="辅导员" prop="teachername">
+            <el-input v-model="form.teachername" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="电话">
-            <el-input v-model="form.tellNum" style="width: 370px;" />
+            <el-input v-model="form.tellnum" style="width: 370px;" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -111,17 +114,17 @@
         />
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
         <el-table-column v-if="columns.visible('sex')" prop="sex" label="性别" />
-        <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" />
+        <!-- <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" /> -->
         <el-table-column v-if="columns.visible('cid')" prop="cid" label="班级" />
         <el-table-column v-if="columns.visible('idnum')" prop="idnum" label="身份证" />
         <el-table-column v-if="columns.visible('address')" prop="address" label="地址" />
         <el-table-column v-if="columns.visible('email')" prop="email" label="邮箱" />
         <el-table-column v-if="columns.visible('hobby')" prop="hobby" label="兴趣爱好" />
-        <el-table-column v-if="columns.visible('parentName')" prop="parentName" label="家长姓名" />
-        <el-table-column v-if="columns.visible('parentNum')" prop="parentNum" label="家长电话" />
-        <el-table-column v-if="columns.visible('guiderTeacher')" prop="guiderTeacher" label="导师" />
-        <el-table-column v-if="columns.visible('teacherName')" prop="teacherName" label="辅导员" />
-        <el-table-column v-if="columns.visible('tellNum')" prop="tellNum" label="电话" />
+        <el-table-column v-if="columns.visible('parentname')" prop="parentname" label="家长姓名" />
+        <el-table-column v-if="columns.visible('parentnum')" prop="parentnum" label="家长电话" />
+        <el-table-column v-if="columns.visible('guiderteacher')" prop="guiderteacher" label="导师" />
+        <el-table-column v-if="columns.visible('teachername')" prop="teachername" label="辅导员" />
+        <el-table-column v-if="columns.visible('tellnum')" prop="tellnum" label="电话" />
         <el-table-column
           v-permission="['admin','studentInfo:edit','studentInfo:del']"
           label="操作"
@@ -142,7 +145,7 @@
 <script>
 import crudStudentInfo from '@/api/studentInfo'
 import CRUD, { presenter, header, form, crud } from '@crud/crud'
-import { isvalidPhone } from '@/utils/validate'
+// import { isvalidPhone } from '@/utils/validate'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
@@ -157,15 +160,15 @@ export default {
   mixins: [presenter(defaultCrud), header(), form(defaultForm), crud()],
   data() {
     // 自定义验证
-    const validPhone = (rule, value, callback) => {
-      if (!value) {
-        callback(new Error('请输入电话号码'))
-      } else if (!isvalidPhone(value)) {
-        callback(new Error('请输入正确的11位手机号码'))
-      } else {
-        callback()
-      }
-    }
+    // const validPhone = (rule, value, callback) => {
+    //   if (!value) {
+    //     callback(new Error('请输入电话号码'))
+    //   } else if (!isvalidPhone(value)) {
+    //     callback(new Error('请输入正确的11位手机号码'))
+    //   } else {
+    //     callback()
+    //   }
+    // }
     return {
       permission: {
         add: ['admin', 'studentInfo:add'],
@@ -180,12 +183,21 @@ export default {
           { required: true, message: '请输入学号', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
-        email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+        // email: [
+        //   { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+        //   { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+        // ],
+        name: [
+          { required: true, message: '姓名不能为空', trigger: 'blur' }
         ],
-        tellNum: [
-          { required: true, trigger: 'blur', validator: validPhone }
+        cid: [
+          { required: true, message: '班级不能为空', trigger: 'blur' }
+        ],
+        guiderteacher: [
+          { required: true, message: '导师不能为空', trigger: 'blur' }
+        ],
+        teachername: [
+          { required: true, message: '辅导员不能为空', trigger: 'blur' }
         ]
       },
       queryTypeOptions: [

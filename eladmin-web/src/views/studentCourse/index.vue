@@ -4,28 +4,55 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <el-select v-model="query.type" clearable placeholder="类型" class="filter-item" style="width: 130px">
-          <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+        <el-input
+          v-model="query.value"
+          clearable
+          placeholder="输入搜索内容"
+          style="width: 200px;"
+          class="filter-item"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <el-select
+          v-model="query.type"
+          clearable
+          placeholder="类型"
+          class="filter-item"
+          style="width: 130px"
+        >
+          <el-option
+            v-for="item in queryTypeOptions"
+            :key="item.key"
+            :label="item.display_name"
+            :value="item.key"
+          />
         </el-select>
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
-      <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
+      <el-dialog
+        :close-on-click-modal="false"
+        :before-close="crud.cancelCU"
+        :visible.sync="crud.status.cu > 0"
+        :title="crud.status.title"
+        width="500px"
+      >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="studentId" prop="studentId">
+          <el-form-item label="学生id" prop="studentId">
             <el-input v-model="form.studentId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="courseId" prop="courseId">
+          <el-form-item label="课程id" prop="courseId">
             <el-input v-model="form.courseId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="pdate">
-            <el-input v-model="form.pdate" style="width: 370px;" />
+          <el-form-item label="时间">
+            <el-date-picker v-model="form.pdate" type="datetime" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="tearm">
-            <el-input v-model="form.tearm" style="width: 370px;" />
+          <el-form-item label="学期">
+            <el-select v-model="form.tearm" placeholder="请选择学期">
+              <el-option label="1" value="1" />
+              <el-option label="2" value="2" />
+            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -34,23 +61,32 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        size="small"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
-        <el-table-column v-if="columns.visible('studentId')" prop="studentId" label="studentId" />
-        <el-table-column v-if="columns.visible('courseId')" prop="courseId" label="courseId" />
-        <el-table-column v-if="columns.visible('pdate')" prop="pdate" label="pdate">
+        <el-table-column v-if="columns.visible('studentId')" prop="studentId" label="学生id" />
+        <el-table-column v-if="columns.visible('courseId')" prop="courseId" label="课程id" />
+        <el-table-column v-if="columns.visible('pdate')" prop="pdate" label="时间">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.pdate) }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="columns.visible('tearm')" prop="tearm" label="tearm" />
-        <el-table-column v-permission="['admin','studentCourseInfo:edit','studentCourseInfo:del']" label="操作" width="150px" align="center">
+        <el-table-column v-if="columns.visible('tearm')" prop="tearm" label="学期" />
+        <el-table-column
+          v-permission="['admin','studentCourseInfo:edit','studentCourseInfo:del']"
+          label="操作"
+          width="150px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <udOperation
-              :data="scope.row"
-              :permission="permission"
-            />
+            <udOperation :data="scope.row" :permission="permission" />
           </template>
         </el-table-column>
       </el-table>
@@ -109,5 +145,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

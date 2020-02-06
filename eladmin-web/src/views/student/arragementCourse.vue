@@ -4,13 +4,6 @@
     <!--对话框表单-->
     <el-dialog title="对教师评价" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
       <span slot="footer" class="dialog-footer">
-        <!-- <el-table ref="table" :data="teacherData" stripe size="small" style="width: 100%;">
-          <el-table-column prop="name" label="课程名称" />
-          <el-table-column prop="class_teacher" label="授课教师" />
-          <el-table-column prop="class_teacher" label="评价">
-            <el-input v-model="teacherData.class_teacher" placeholder="请输入内容" @change="handleEdit(scope.$index, scope.row)" />
-          </el-table-column>
-        </el-table>-->
         <el-form
           ref="form"
           :model="teacherData"
@@ -43,7 +36,6 @@
             <el-button @click="dialogVisible = false">关闭</el-button>
           </el-form-item>
         </el-form>
-        <!-- <el-button type="primary" @click="summitUp(scope.row)">提交</el-button> -->
       </span>
     </el-dialog>
     <div class="head-container">
@@ -99,15 +91,15 @@ export default {
         // teacher_name: '',
         class_teacher: '',
         memo: ''
-      }],
-      // 评价数据
-      commentData: {
-        username: '',
-        class_id: '',
-        teacher_id: '',
-        teacher_name: '',
-        memo: ''
-      }
+      }]
+      // // 评价数据
+      // commentData: {
+      //   username: '',
+      //   class_id: '',
+      //   teacher_id: '',
+      //   teacher_name: '',
+      //   memo: ''
+      // }
     }
   },
   mounted() {
@@ -132,7 +124,7 @@ export default {
       _this.dialogVisible = true
     },
     onSubmit(data) {
-      console.log(data)
+      // console.log(data)
       if (this.teacherData.memo) {
         InsertCommentByStudent({
           username: data.username,
@@ -141,7 +133,7 @@ export default {
           teacher_id: data.teacher_id,
           memo: data.memo
         }).then(res => {
-          console.log(res)
+          // console.log(res)
         })
       } else {
         this.$message.warning({
