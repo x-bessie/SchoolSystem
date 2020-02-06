@@ -4,30 +4,54 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <el-select v-model="query.type" clearable placeholder="类型" class="filter-item" style="width: 130px">
-          <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+        <el-input
+          v-model="query.value"
+          clearable
+          placeholder="输入搜索内容"
+          style="width: 200px;"
+          class="filter-item"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <el-select
+          v-model="query.type"
+          clearable
+          placeholder="类型"
+          class="filter-item"
+          style="width: 130px"
+        >
+          <el-option
+            v-for="item in queryTypeOptions"
+            :key="item.key"
+            :label="item.display_name"
+            :value="item.key"
+          />
         </el-select>
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
-      <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
+      <el-dialog
+        :close-on-click-modal="false"
+        :before-close="crud.cancelCU"
+        :visible.sync="crud.status.cu > 0"
+        :title="crud.status.title"
+        width="500px"
+      >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <el-form-item label="教师id" prop="userId">
             <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="工号">
+          <el-form-item label="工号" prop="teacherid">
             <el-input v-model="form.teacherid" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name" maxlength="10" show-word-limit style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="年龄">
+          <!-- <el-form-item label="年龄">
             <el-input v-model="form.age" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="性别">
+          </el-form-item>-->
+          <el-form-item label="性别" prop="sex">
             <el-select v-model="form.sex" placeholder="请选择性别">
               <el-option label="男" value="男" />
               <el-option label="女" value="女" />
@@ -49,22 +73,32 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        size="small"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
-        <el-table-column v-if="columns.visible('userId')" prop="userId" label="教师id" /><el-table-column v-if="columns.visible('teacherid')" prop="teacherid" label="工号" />
+        <el-table-column v-if="columns.visible('userId')" prop="userId" label="教师id" />
+        <el-table-column v-if="columns.visible('teacherid')" prop="teacherid" label="工号" />
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
-        <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" />
+        <!-- <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" /> -->
         <el-table-column v-if="columns.visible('sex')" prop="sex" label="性别" />
         <el-table-column v-if="columns.visible('address')" prop="address" label="地址" />
         <el-table-column v-if="columns.visible('phone')" prop="phone" label="电话" />
         <el-table-column v-if="columns.visible('idnum')" prop="idnum" label="身份证" />
-        <el-table-column v-permission="['admin','teachersInfo:edit','teachersInfo:del']" label="操作" width="150px" align="center">
+        <el-table-column
+          v-permission="['admin','teachersInfo:edit','teachersInfo:del']"
+          label="操作"
+          width="150px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <udOperation
-              :data="scope.row"
-              :permission="permission"
-            />
+            <udOperation :data="scope.row" :permission="permission" />
           </template>
         </el-table-column>
       </el-table>
@@ -102,6 +136,12 @@ export default {
         ],
         name: [
           { required: true, message: '姓名不能为空', trigger: 'blur' }
+        ],
+        teacherid: [
+          { required: true, message: '工号不能为空', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '性别不能为空', trigger: 'blur' }
         ]
       },
       queryTypeOptions: [
@@ -125,5 +165,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
