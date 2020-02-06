@@ -82,4 +82,12 @@ public interface StudentInfoService {
      * @param username
      */
     void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num,String tell_num, String username);
+
+    /**
+     * 新增到学生信息
+     * @param username
+     * @param name
+     * @param sex
+     */
+    void InsertStudentInfo( String username, String name, String sex);
 }

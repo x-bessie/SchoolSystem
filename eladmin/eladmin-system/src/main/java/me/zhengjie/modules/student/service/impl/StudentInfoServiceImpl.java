@@ -141,8 +141,22 @@ public class StudentInfoServiceImpl implements StudentInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num,String username) {
-        studentInfoRepository.updateStudentInfos(idNum, address, email, hobby, parent_name, parent_num,tell_num, username);
+    public void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num, String username) {
+        studentInfoRepository.updateStudentInfos(idNum, address, email, hobby, parent_name, parent_num, tell_num, username);
+
+    }
+
+    /**
+     * 新增到学生信息
+     *
+     * @param username
+     * @param name
+     * @param sex
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void InsertStudentInfo(String username, String name, String sex) {
+        studentInfoRepository.InsertStudentInfo(username, name, sex);
 
     }
 

@@ -96,16 +96,28 @@ public class StudentInfoController {
     @PostMapping(value = "/updateStudentInfos")
     public ResponseEntity<Object> updateStudentInfos(
 //            @RequestParam("age") Integer age,
-                                                     @RequestParam("IDNum") String IDNum,
-                                                     @RequestParam("address") String address,
-                                                     @RequestParam("email") String email,
-                                                     @RequestParam("Hobby") String Hobby,
-                                                     @RequestParam("parent_name") String parent_name,
-                                                     @RequestParam("parent_num") String parent_num,
-                                                     @RequestParam("tell_num") String tell_num,
-                                                     @RequestParam("username") String username
+            @RequestParam("IDNum") String IDNum,
+            @RequestParam("address") String address,
+            @RequestParam("email") String email,
+            @RequestParam("Hobby") String Hobby,
+            @RequestParam("parent_name") String parent_name,
+            @RequestParam("parent_num") String parent_num,
+            @RequestParam("tell_num") String tell_num,
+            @RequestParam("username") String username
     ) {
-        studentInfoService.updateStudentInfos( IDNum, address, email, Hobby, parent_name, parent_num, tell_num, username);
+        studentInfoService.updateStudentInfos(IDNum, address, email, Hobby, parent_name, parent_num, tell_num, username);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Log("新增到学生信息")
+    @ApiOperation("新增到学生信息")
+    @PostMapping(value = "/InsertStudentInfo")
+    public ResponseEntity<Object> InsertStudentInfo(
+            @RequestParam("username") String username,
+            @RequestParam("name") String name,
+            @RequestParam("sex") String sex
+    ) {
+        studentInfoService.InsertStudentInfo( username, name, sex);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

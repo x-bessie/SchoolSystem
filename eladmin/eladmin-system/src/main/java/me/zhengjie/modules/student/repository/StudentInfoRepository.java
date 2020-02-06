@@ -24,11 +24,12 @@ public interface StudentInfoRepository extends JpaRepository<StudentInfo, Intege
      * @param userName
      * @return
      */
-    @Query(value = "select * from student_info  WHERE user_id in ( select id from user  where username = ?1 )", nativeQuery = true)
+    @Query(value = "select * from student_info  WHERE username=?1", nativeQuery = true)
     List<Map<String, Object>> getStudentInfoByUserName(String userName);
 
     /**
      * 更新个人信息
+     *
      * @param idNum
      * @param address
      * @param email
@@ -40,5 +41,9 @@ public interface StudentInfoRepository extends JpaRepository<StudentInfo, Intege
      */
     @Modifying
     @Query(value = "update student_info set  IDNum=?1, address=?2, email=?3,Hobby=?4,parent_name=?5,parent_num=?6, tell_num=?7 where username=?8 ", nativeQuery = true)
-    void updateStudentInfos( String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num, String username);
+    void updateStudentInfos(String idNum, String address, String email, String hobby, String parent_name, String parent_num, String tell_num, String username);
+
+    @Modifying
+    @Query(value = "insert ignore into student_info (username,name,sex) values (?1,?2,?3);", nativeQuery = true)
+    void InsertStudentInfo( String username, String name, String sex);
 }

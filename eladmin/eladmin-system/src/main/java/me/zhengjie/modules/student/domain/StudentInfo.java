@@ -74,7 +74,6 @@ public class StudentInfo implements Serializable {
 
 
     @Column(name = "user_id",nullable = false)
-    @NotNull
     private Long userId;
 
     @Id
