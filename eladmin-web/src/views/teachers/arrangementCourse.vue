@@ -2,13 +2,6 @@
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
-      <!--检索框-->
-      <el-input
-        clearable
-        placeholder="输入搜索内容"
-        style="width: 200px;"
-        class="filter-item"
-      />
       <!--对话框表单-->
       <el-dialog title="课程学生" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
         <span slot="footer" class="dialog-footer">
@@ -20,7 +13,6 @@
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
-      <!-- <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button> -->
       <!--表格渲染-->
       <el-table ref="table" :data="tableData" stripe size="small" style="width: 100%;">
         <el-table-column prop="name" label="课程名称" width="180" />
