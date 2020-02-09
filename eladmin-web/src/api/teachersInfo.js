@@ -49,7 +49,6 @@ export function getTeachersInfoByUserName(data) {
   })
 }
 export function updateTeacherInfo(data) {
-  // console.log('data', data)
   return request({
     url: 'api/teachersInfo/updateTeacherInfo',
     method: 'post',
@@ -57,4 +56,11 @@ export function updateTeacherInfo(data) {
   })
 }
 
-export default { add, edit, del, getTeacherCourseMessage, getTeacherCourseToSeeStudent, getTeachersInfoByUserName, updateTeacherInfo }
+export function InsertTeacherInfo(data) {
+  return request({
+    url: 'api/teachersInfo/InsertTeacherInfo',
+    method: 'post',
+    params: data
+  })
+}
+export default { add, edit, del, getTeacherCourseMessage, getTeacherCourseToSeeStudent, getTeachersInfoByUserName, updateTeacherInfo, InsertTeacherInfo }
