@@ -33,9 +33,9 @@
           <el-form-item label="创建时间">
             <el-input v-model="form.createtime" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="状态">
+          <!-- <el-form-item label="状态">
             <el-input v-model="form.status" style="width: 370px;" />
-          </el-form-item>
+          </el-form-item> -->
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="text" @click="crud.cancelCU">取消</el-button>
@@ -56,7 +56,7 @@
             <span>{{ parseTime(scope.row.createtime) }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-if="columns.visible('status')" prop="status" label="状态" />
+        <!-- <el-table-column v-if="columns.visible('status')" prop="status" label="状态" /> -->
         <el-table-column v-permission="['admin','commentInfo:edit','commentInfo:del']" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <udOperation
