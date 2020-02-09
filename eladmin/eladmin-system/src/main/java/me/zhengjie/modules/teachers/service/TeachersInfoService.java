@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author HUO
+ * @author bessie
  * @date 2020-01-13
  */
 public interface TeachersInfoService {

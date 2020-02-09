@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
-* @author HUO
+* @author bessie
 * @date 2020-01-13
 */
 @Entity
