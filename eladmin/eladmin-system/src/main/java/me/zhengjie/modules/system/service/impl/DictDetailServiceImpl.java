@@ -19,10 +19,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
-/**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+
 @Service
 @CacheConfig(cacheNames = "dictDetail")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)

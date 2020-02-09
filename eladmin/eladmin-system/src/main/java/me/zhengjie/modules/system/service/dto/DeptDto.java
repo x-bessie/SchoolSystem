@@ -9,10 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
-* @author Zheng Jie
-* @date 2019-03-25
-*/
+
 @Data
 public class DeptDto implements Serializable {
 

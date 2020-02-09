@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-03-25
-*/
+ * @author bessie
+ */
 public interface DeptService {
 
     /**

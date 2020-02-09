@@ -28,10 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+
 @Service
 @CacheConfig(cacheNames = "dict")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)

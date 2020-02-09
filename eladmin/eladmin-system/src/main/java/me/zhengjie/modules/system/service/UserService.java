@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-23
+ * @author bessie
  */
 public interface UserService {
 

@@ -7,8 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 /**
-* @author HUO
-* @date 2020-01-08
+* @author bessie
+* @date 2020-01-14
 */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MessageInfoMapper extends BaseMapper<MessageInfoDto, MessageInfo> {

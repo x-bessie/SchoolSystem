@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
- * @date 2018-12-03
+ * @author bessie
  */
 public interface RoleService {
 

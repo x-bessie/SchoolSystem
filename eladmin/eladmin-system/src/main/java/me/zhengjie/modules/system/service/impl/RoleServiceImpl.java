@@ -28,10 +28,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author Zheng Jie
- * @date 2018-12-03
- */
+
 @Service
 @CacheConfig(cacheNames = "role")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
