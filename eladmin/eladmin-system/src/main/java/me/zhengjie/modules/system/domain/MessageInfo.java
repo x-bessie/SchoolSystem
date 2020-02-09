@@ -9,9 +9,8 @@ import java.sql.Timestamp;
 import java.io.Serializable;
 
 /**
-* @author HUO
-* @date 2020-01-14
-*/
+ * @author bessie
+ */
 @Entity
 @Data
 @Table(name="message_info")

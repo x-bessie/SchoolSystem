@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author Zheng Jie
- * @date 2018-12-20
+ * @author bessie
  */
 @Data
 @AllArgsConstructor
