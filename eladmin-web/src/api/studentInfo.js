@@ -38,5 +38,11 @@ export function updateStudentInfos(data) {
     params: data
   })
 }
-
-export default { add, edit, del, getStudentInfoByName, updateStudentInfos }
+export function InsertStudentInfo(data) {
+  return request({
+    url: 'api/studentInfo/InsertStudentInfo',
+    method: 'post',
+    params: data
+  })
+}
+export default { add, edit, del, getStudentInfoByName, updateStudentInfos, InsertStudentInfo }
