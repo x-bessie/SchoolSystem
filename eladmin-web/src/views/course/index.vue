@@ -4,16 +4,40 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <el-select v-model="query.type" clearable placeholder="类型" class="filter-item" style="width: 130px">
-          <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+        <el-input
+          v-model="query.value"
+          clearable
+          placeholder="输入搜索内容"
+          style="width: 200px;"
+          class="filter-item"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <el-select
+          v-model="query.type"
+          clearable
+          placeholder="类型"
+          class="filter-item"
+          style="width: 130px"
+        >
+          <el-option
+            v-for="item in queryTypeOptions"
+            :key="item.key"
+            :label="item.display_name"
+            :value="item.key"
+          />
         </el-select>
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
-      <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
+      <el-dialog
+        :close-on-click-modal="false"
+        :before-close="crud.cancelCU"
+        :visible.sync="crud.status.cu > 0"
+        :title="crud.status.title"
+        width="500px"
+      >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <el-form-item label="课程名称" prop="name">
             <el-input v-model="form.name" style="width: 370px;" />
@@ -37,10 +61,22 @@
             <el-input v-model="form.classCode" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="学期" prop="tearm">
-            未设置字典，请手动设置 Select
+            <el-select v-model="form.tearm" placeholder="请选择学期">
+              <el-option label="1" value="1" />
+              <el-option label="2" value="2" />
+            </el-select>
           </el-form-item>
           <el-form-item label="学年" prop="schoolYear">
-            <el-input v-model="form.schoolYear" style="width: 370px;" />
+            <el-select v-model="form.schoolYear" placeholder="请选择学年,如：2019-2020">
+              <el-option label="2019-2020" value="2019-2020" />
+              <el-option label="2020-2021" value="2020-2021" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="状态值：0 禁用,1激活">
+            <el-select v-model="form.status" placeholder="请选择状态值">
+              <el-option label="禁用" value="0" />
+              <el-option label="激活" value="1" />
+            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -49,7 +85,14 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        size="small"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
         <el-table-column v-if="columns.visible('name')" prop="name" label="课程名称" />
@@ -65,12 +108,15 @@
         <el-table-column v-if="columns.visible('classCode')" prop="classCode" label="课程代码" />
         <el-table-column v-if="columns.visible('tearm')" prop="tearm" label="学期" />
         <el-table-column v-if="columns.visible('schoolYear')" prop="schoolYear" label="学年" />
-        <el-table-column v-permission="['admin','courseInfo:edit','courseInfo:del']" label="操作" width="150px" align="center">
+        <el-table-column v-if="columns.visible('status')" prop="status" label="状态值：0 禁用,1激活" />
+        <el-table-column
+          v-permission="['admin','courseInfo:edit','courseInfo:del']"
+          label="操作"
+          width="150px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <udOperation
-              :data="scope.row"
-              :permission="permission"
-            />
+            <udOperation :data="scope.row" :permission="permission" />
           </template>
         </el-table-column>
       </el-table>
@@ -134,6 +180,7 @@ export default {
       queryTypeOptions: [
         { key: 'name', display_name: '课程名称' },
         { key: 'classCode', display_name: '课程代码' },
+        { key: 'tearm', display_name: '学期' },
         { key: 'schoolYear', display_name: '学年' }
       ]
     }
@@ -152,5 +199,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
