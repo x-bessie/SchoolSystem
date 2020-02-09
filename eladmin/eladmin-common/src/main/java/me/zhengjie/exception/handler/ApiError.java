@@ -5,10 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Zheng Jie
- * @date 2018-11-23
- */
+
 @Data
 class ApiError {
 

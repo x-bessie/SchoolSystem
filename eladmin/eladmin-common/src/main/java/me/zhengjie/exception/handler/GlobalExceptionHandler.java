@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Objects;
 import static org.springframework.http.HttpStatus.*;
 
-/**
- * @author Zheng Jie
- * @date 2018-11-23
- */
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

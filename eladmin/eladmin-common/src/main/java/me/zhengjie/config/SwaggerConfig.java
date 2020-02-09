@@ -28,8 +28,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 /**
  * api页面 /swagger-ui.html
- * @author Zheng Jie
- * @date 2018-11-23
+ * @author
  */
 
 @Configuration

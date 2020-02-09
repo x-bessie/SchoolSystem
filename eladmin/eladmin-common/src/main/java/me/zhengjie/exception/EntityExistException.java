@@ -2,10 +2,7 @@ package me.zhengjie.exception;
 
 import org.springframework.util.StringUtils;
 
-/**
- * @author Zheng Jie
- * @date 2018-11-23
- */
+
 public class EntityExistException extends RuntimeException {
 
     public EntityExistException(Class clazz, String field, String val) {
