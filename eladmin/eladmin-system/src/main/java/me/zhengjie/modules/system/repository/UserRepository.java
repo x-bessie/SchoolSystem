@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-22
+ * @author bessie
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
