@@ -11,9 +11,9 @@
         <el-form-item label="性别">
           <el-input v-model="form.sex" placeholder="性别" :disabled="true" style="width: 370px;" />
         </el-form-item>
-        <el-form-item label="班级">
+        <!-- <el-form-item label="班级">
           <el-input v-model="form.cid" :disabled="true" style="width: 370px;" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="身份证" prop="IDNum">
           <el-input v-model="form.IDNum" style="width: 370px;" />
         </el-form-item>
