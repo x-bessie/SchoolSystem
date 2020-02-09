@@ -23,9 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-03-25
-*/
+ * @author bessie
+ */
 @RestController
 @Api(tags = "系统：部门管理")
 @RequestMapping("/api/dept")

@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+ * @author bessie
+ */
 @Api(tags = "系统：字典管理")
 @RestController
 @RequestMapping("/api/dict")

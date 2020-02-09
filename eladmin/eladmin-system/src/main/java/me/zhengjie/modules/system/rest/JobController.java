@@ -20,9 +20,8 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-03-29
-*/
+ * @author bessie
+ */
 @Api(tags = "系统：岗位管理")
 @RestController
 @RequestMapping("/api/job")
