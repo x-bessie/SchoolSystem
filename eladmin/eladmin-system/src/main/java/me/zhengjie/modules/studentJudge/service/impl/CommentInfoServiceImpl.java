@@ -118,7 +118,23 @@ public class CommentInfoServiceImpl implements CommentInfoService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void InsertCommentByStudent(String username, Integer class_id, String teacher_name, Integer teacher_id, String memo) {
-        commentInfoRepository.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo,new Date());
+        commentInfoRepository.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo, new Date());
 
+    }
+
+    /**
+     * 评价之前的查询
+     *
+     * @param class_id
+     * @param teacher_name
+     * @param status
+     */
+    @Override
+    public Object queryCommentByStudent(Integer class_id, String teacher_name, String status) {
+        List<Map<String, Object>> list = commentInfoRepository.queryCommentByStudent(class_id, teacher_name, status);
+        if (list == null) {
+            return "暂时本课程无成绩";
+        }
+        return list;
     }
 }
