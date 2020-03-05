@@ -1,6 +1,7 @@
 package me.zhengjie.modules.system.service;
 
 import me.zhengjie.modules.system.domain.User;
+import me.zhengjie.modules.system.domain.vo.UserBatchVo;
 import me.zhengjie.modules.system.service.dto.UserDto;
 import me.zhengjie.modules.system.service.dto.UserQueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -118,4 +119,10 @@ public interface UserService {
      */
     Object getUserIdByName(String userName);
 
+
+    /**
+     * 批量新增
+     * @param userbatch
+     */
+    Object batchCreate(List<UserBatchVo> userbatch);
 }
