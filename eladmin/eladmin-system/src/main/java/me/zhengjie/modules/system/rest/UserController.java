@@ -2,6 +2,7 @@ package me.zhengjie.modules.system.rest;
 
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import com.alibaba.fastjson.JSONArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import me.zhengjie.aop.log.Log;
@@ -9,6 +10,7 @@ import me.zhengjie.config.DataScope;
 import me.zhengjie.domain.VerificationCode;
 import me.zhengjie.modules.system.domain.User;
 import me.zhengjie.exception.BadRequestException;
+import me.zhengjie.modules.system.domain.vo.UserBatchVo;
 import me.zhengjie.modules.system.domain.vo.UserPassVo;
 import me.zhengjie.modules.system.service.DeptService;
 import me.zhengjie.modules.system.service.RoleService;
@@ -212,7 +214,6 @@ public class UserController {
     }
 
 
-
     /**
      * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
      *
@@ -225,5 +226,15 @@ public class UserController {
         if (currentLevel > optLevel) {
             throw new BadRequestException("角色权限不足");
         }
+    }
+
+    //    @Log("新增用户")
+    @ApiOperation("批量导入用户")
+    @PostMapping(value = "/batchCreate")
+    public ResponseEntity<Object> batchCreate(@RequestBody List<UserBatchVo> userBatchVos ) {
+        // 默认密码 123456
+        System.out.println(userBatchVos.toString());
+//
+        return new ResponseEntity<Object>(userService.batchCreate(userBatchVos), HttpStatus.OK);
     }
 }
