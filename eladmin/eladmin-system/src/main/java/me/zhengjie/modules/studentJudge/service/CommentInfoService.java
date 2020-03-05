@@ -73,4 +73,12 @@ public interface CommentInfoService {
      * @param memo
      */
     void InsertCommentByStudent(String username, Integer class_id, String teacher_name, Integer teacher_id, String memo);
+
+    /**
+     * 评价之前的查询
+     * @param class_id
+     * @param teacher_name
+     * @param status
+     */
+    Object queryCommentByStudent(Integer class_id, String teacher_name, String status);
 }
