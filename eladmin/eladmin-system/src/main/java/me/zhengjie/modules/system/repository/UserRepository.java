@@ -56,5 +56,9 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
 
     @Query(value = "select * from user  where userName = ?1", nativeQuery = true)
-    List<Map<String,Object>> getUserIdByName(String userName);
+    List<Map<String, Object>> getUserIdByName(String userName);
+
+    @Modifying
+    @Query(value = "insert into user (username,email,enabled,password,phone,dept_id,job_id,nick_name,sex,create_time) values(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10)", nativeQuery = true)
+    void saveUsers(String username, String email, Long enabled, String password, String phone, Long dept, Long job, String nickname, String sex, Date createTime);
 }
