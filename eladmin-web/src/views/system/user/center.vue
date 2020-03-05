@@ -29,7 +29,7 @@
                 <svg-icon icon-class="anq" /> 安全设置
                 <div class="user-right">
                   <a @click="$refs.pass.dialog = true">修改密码</a>
-                  <a @click="$refs.email.dialog = true">修改邮箱</a>
+                  <!-- <a @click="$refs.email.dialog = true">修改邮箱</a> -->
                 </div>
               </li>
             </ul>
@@ -49,6 +49,10 @@
                 <el-form-item label="手机号" prop="phone">
                   <el-input v-model="form.phone" style="width: 35%;" />
                   <span style="color: #C0C0C0;margin-left: 10px;">手机号码不能重复</span>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="email">
+                  <el-input v-model="form.email" style="width: 35%;" />
+                  <span style="color: #C0C0C0;margin-left: 10px;">邮箱</span>
                 </el-form-item>
                 <el-form-item label="性别">
                   <el-radio-group v-model="form.sex" style="width: 178px">
@@ -146,6 +150,10 @@ export default {
         ],
         phone: [
           { required: true, trigger: 'blur', validator: validPhone }
+        ],
+        email: [
+          { required: true, message: '邮箱不能为空', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
         ]
       }
     }
@@ -158,7 +166,7 @@ export default {
     ])
   },
   created() {
-    this.form = { id: this.user.id, nickName: this.user.nickName, sex: this.user.sex, phone: this.user.phone }
+    this.form = { id: this.user.id, nickName: this.user.nickName, sex: this.user.sex, phone: this.user.phone, email: this.user.email }
     store.dispatch('GetInfo').then(() => {})
   },
   methods: {
