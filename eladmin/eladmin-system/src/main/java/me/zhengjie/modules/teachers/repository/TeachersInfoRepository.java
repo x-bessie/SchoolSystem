@@ -23,7 +23,7 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
      * @param username
      * @return
      */
-    @Query(value = "SELECT a.* FROM course_info AS a, teachers_info AS b WHERE a.teacher_id=b.id  AND b.teacherid= ?1 and status=1", nativeQuery = true)
+    @Query(value = "SELECT a.* FROM course_info AS a, teachers_info AS b WHERE a.teacher_id=b.teacherid  AND b.teacherid= ?1 and status=1", nativeQuery = true)
     List<Map<String, Object>> getTeacherCourseMessage(String username);
 
     /**
@@ -42,7 +42,6 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
      * @param username
      * @return
      */
-//    @Query(value = "select * from teachers_info  WHERE user_id in ( select id from user  where username = ?1 )", nativeQuery = true)
     @Query(value = "select * from teachers_info  WHERE teacherid=?1", nativeQuery = true)
     List<Map<String, Object>> getTeachersInfoByUserName(String username);
 
