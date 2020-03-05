@@ -11,13 +11,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
+
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @author bessie
-* @date 2020-01-30
-*/
+ * @author bessie
+ * @date 2020-01-30
+ */
 @Api(tags = "教师评价管理")
 @RestController
 @RequestMapping("/api/commentInfo")
@@ -41,23 +42,23 @@ public class CommentInfoController {
     @Log("查询教师评价")
     @ApiOperation("查询教师评价")
     @PreAuthorize("@el.check('commentInfo:list')")
-    public ResponseEntity<Object> getCommentInfos(CommentInfoQueryCriteria criteria, Pageable pageable){
-        return new ResponseEntity<>(commentInfoService.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<Object> getCommentInfos(CommentInfoQueryCriteria criteria, Pageable pageable) {
+        return new ResponseEntity<>(commentInfoService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
     @PostMapping
     @Log("新增教师评价")
     @ApiOperation("新增教师评价")
     @PreAuthorize("@el.check('commentInfo:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody CommentInfo resources){
-        return new ResponseEntity<>(commentInfoService.create(resources),HttpStatus.CREATED);
+    public ResponseEntity<Object> create(@Validated @RequestBody CommentInfo resources) {
+        return new ResponseEntity<>(commentInfoService.create(resources), HttpStatus.CREATED);
     }
 
     @PutMapping
     @Log("修改教师评价")
     @ApiOperation("修改教师评价")
     @PreAuthorize("@el.check('commentInfo:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody CommentInfo resources){
+    public ResponseEntity<Object> update(@Validated @RequestBody CommentInfo resources) {
         commentInfoService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -81,8 +82,20 @@ public class CommentInfoController {
             @RequestParam("teacher_id") Integer teacher_id,
             @RequestParam("memo") String memo
     ) {
-        commentInfoService.InsertCommentByStudent(username,class_id,teacher_name, teacher_id,memo);
+        commentInfoService.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @ApiOperation("评价：评价之前的查询")
+    @GetMapping(value = "/queryCommentByStudent")
+    public ResponseEntity<Object> queryCommentByStudent(
+            @RequestParam("class_id") Integer class_id,
+            @RequestParam("teacher_name") String teacher_name,
+            @RequestParam("status") String status
+    ) {
+
+        return new ResponseEntity<>(commentInfoService.queryCommentByStudent(class_id, teacher_name, status),HttpStatus.OK);
     }
 
 
