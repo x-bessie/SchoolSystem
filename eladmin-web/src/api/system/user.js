@@ -56,6 +56,13 @@ export function updateEmail(form) {
     data
   })
 }
+export function batchCreate(tables) {
+  return request({
+    url: 'api/users/batchCreate/',
+    method: 'post',
+    data: tables
+  })
+}
 
 export default { add, edit, del }
 
