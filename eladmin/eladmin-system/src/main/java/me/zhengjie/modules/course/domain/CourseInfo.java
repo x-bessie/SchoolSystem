@@ -51,7 +51,7 @@ public class CourseInfo implements Serializable {
     /** 教师Id */
     @Column(name = "teacher_id",nullable = false)
     @NotNull
-    private Integer teacherId;
+    private String teacherId;
 
     /** 课程代码 */
     @Column(name = "class_code",nullable = false)
