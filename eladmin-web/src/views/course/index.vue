@@ -54,7 +54,7 @@
           <el-form-item label="任课教师" prop="classTeacher">
             <el-input v-model="form.classTeacher" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="教师Id" prop="teacherId">
+          <el-form-item label="教师工号" prop="teacherId">
             <el-input v-model="form.teacherId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="课程代码" prop="classCode">
@@ -104,7 +104,7 @@
         <el-table-column v-if="columns.visible('classtime')" prop="classtime" label="课程时长" />
         <el-table-column v-if="columns.visible('classNum')" prop="classNum" label="周数" />
         <el-table-column v-if="columns.visible('classTeacher')" prop="classTeacher" label="任课教师" />
-        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师Id" />
+        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师工号" />
         <el-table-column v-if="columns.visible('classCode')" prop="classCode" label="课程代码" />
         <el-table-column v-if="columns.visible('tearm')" prop="tearm" label="学期" />
         <el-table-column v-if="columns.visible('schoolYear')" prop="schoolYear" label="学年" />
@@ -165,7 +165,7 @@ export default {
           { required: true, message: '任课教师不能为空', trigger: 'blur' }
         ],
         teacherId: [
-          { required: true, message: '教师Id不能为空', trigger: 'blur' }
+          { required: true, message: '教师工号不能为空', trigger: 'blur' }
         ],
         classCode: [
           { required: true, message: '课程代码不能为空', trigger: 'blur' }

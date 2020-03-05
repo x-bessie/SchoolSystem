@@ -2,7 +2,7 @@
   <div class="app-container">
     <!--工具栏-->
     <!--对话框表单-->
-    <el-dialog title="对教师评价" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+    <el-dialog title="对教师评价" :visible.sync="dialogVisible" :before-close="handleClose">
       <span slot="footer" class="dialog-footer">
         <el-form
           ref="form"
@@ -10,7 +10,7 @@
           :inline="true"
           stripe
           size="small"
-          style="width: 70%;"
+          style="width: 80%;"
         >
           <el-form-item label="课程名称">
             <el-input
@@ -25,30 +25,44 @@
               v-model="teacherData.class_teacher"
               :disabled="true"
               placeholder="授课教师"
-              style="width: 300px;"
+              style="width: 300px"
+            />
+          </el-form-item>
+          <el-form-item label="评价指标">
+            <el-input
+              type="textarea"
+              :disabled="true"
+              placeholder="1.备课充分，讲课认真，不随意掉停课，对学生要求严格。2.讲课内容准确熟练，教学重点难点突出。3.理论联系实际，能激发学生求职欲（专业技能熟练，示范准确，指导有力）4.教学语言精炼生动，教学仪态自然大方 5.注重启发，鼓励质疑，并给予思路引导"
+              style="min-height: 140px; width:300px;"
+              label-width="60px"
             />
           </el-form-item>
           <el-form-item label="评价">
-            <el-input v-model="teacherData.memo" style="width: 300px;" />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit(teacherData)">提交</el-button>
-            <el-button @click="dialogVisible = false">关闭</el-button>
+            <!-- <el-input v-model="teacherData.memo" style="width: 300px;" /> -->
+            <el-select v-model="teacherData.memo" placeholder="评价分数" style="width: 300px;">
+              <el-option :label="90" :value="90" />
+              <el-option :label="80" :value="80" />
+              <el-option :label="70" :value="70" />
+              <el-option :label="60" :value="60" />
+              <el-option :label="50" :value="50" />
+            </el-select>
           </el-form-item>
         </el-form>
+        <el-button type="primary" @click="onSubmit(teacherData)">提交</el-button>
+        <el-button @click="dialogVisible = false">关闭</el-button>
       </span>
     </el-dialog>
     <div class="head-container">
       <!--学生课程表表格渲染-->
       <el-table ref="table" :data="tableData" size="small" style="width: 100%;">
-        <el-table-column prop="course_name" label="课程名称" width="180" />
-        <el-table-column prop="classtime" label="课程时长(min)" width="180" />
-        <el-table-column prop="class_num" label="课程时长周数" width="180" />
-        <el-table-column prop="class_teacher" label="任课教师" width="180" />
-        <el-table-column prop="class_code" label="课程代码" width="180" />
-        <el-table-column prop="school_year" label="学年" width="180" />
-        <el-table-column prop="tearm" label="学期" width="180" />
-        <el-table-column label="操作" width="150">
+        <el-table-column prop="course_name" label="课程名称" style="180" />
+        <el-table-column prop="classtime" label="课程时长(min)" style="150" />
+        <el-table-column prop="class_num" label="课程时长周数" style="130" />
+        <el-table-column prop="class_teacher" label="任课教师" style="180" />
+        <el-table-column prop="class_code" label="课程代码" style="180" />
+        <el-table-column prop="school_year" label="学年" style="180" />
+        <el-table-column prop="tearm" label="学期" style="120" />
+        <el-table-column label="操作" style="150">
           <template scope="scope">
             <el-button size="small" @click="judgeTeachers(scope.$index, scope.row)">对教师评价</el-button>
           </template>
@@ -60,7 +74,7 @@
 
 <script>
 import { getStudentCourseMessage } from '@/api/studentCourseInfo'
-import { InsertCommentByStudent } from '@/api/commentInfo'
+import { InsertCommentByStudent, queryCommentByStudent } from '@/api/commentInfo'
 import moment from 'moment'
 
 export default {
@@ -90,16 +104,12 @@ export default {
         // name: '',
         // teacher_name: '',
         class_teacher: '',
-        memo: ''
-      }]
-      // // 评价数据
-      // commentData: {
-      //   username: '',
-      //   class_id: '',
-      //   teacher_id: '',
-      //   teacher_name: '',
-      //   memo: ''
-      // }
+        memo: '',
+        status: ''
+      }],
+      // 评价数据
+      commentData: {
+      }
     }
   },
   mounted() {
@@ -126,18 +136,44 @@ export default {
     onSubmit(data) {
       // console.log(data)
       if (this.teacherData.memo) {
-        InsertCommentByStudent({
-          username: data.username,
+        queryCommentByStudent({
           class_id: data.course_id,
           teacher_name: data.class_teacher,
-          teacher_id: data.teacher_id,
-          memo: data.memo
+          status: '1'
         }).then(res => {
-          // console.log(res)
+          console.log(res.length)
+          if (res[0] && res[0].status === 1) {
+            this.$message.warning({
+              message: '已经提交评价，请勿再次提交',
+              center: true,
+              duration: 1000,
+              onClose: () => {
+                this.dialogVisible = false
+              }
+            })
+          } else if (res.length === 0) {
+            InsertCommentByStudent({
+              username: data.username,
+              class_id: data.course_id,
+              teacher_name: data.class_teacher,
+              teacher_id: data.teacher_id,
+              memo: data.memo
+            }).then(res => {
+              // console.log(res)
+              this.$message.success({
+                message: '评价成功！',
+                center: true,
+                duration: 1000,
+                onClose: () => {
+                  this.dialogVisible = false
+                }
+              })
+            })
+          }
         })
       } else {
         this.$message.warning({
-          message: '请输入评价',
+          message: '请输入成绩',
           center: true,
           duration: 1000
         })
