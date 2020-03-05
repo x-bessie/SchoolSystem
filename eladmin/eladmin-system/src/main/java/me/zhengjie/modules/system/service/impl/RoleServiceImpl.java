@@ -162,6 +162,19 @@ public class RoleServiceImpl implements RoleService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 根据userid 插入
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object insertUserId(Long userId, Long roleId) {
+        roleRepository.insertUserId(userId,roleId);
+        return null;
+    }
+
     @Override
     public void download(List<RoleDto> roles, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();

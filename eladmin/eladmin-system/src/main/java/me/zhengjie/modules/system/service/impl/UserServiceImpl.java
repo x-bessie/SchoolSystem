@@ -2,8 +2,10 @@ package me.zhengjie.modules.system.service.impl;
 
 import me.zhengjie.exception.EntityExistException;
 import me.zhengjie.exception.EntityNotFoundException;
-import me.zhengjie.modules.system.domain.User;
-import me.zhengjie.modules.system.domain.UserAvatar;
+import me.zhengjie.modules.student.repository.StudentInfoRepository;
+import me.zhengjie.modules.system.domain.*;
+import me.zhengjie.modules.system.domain.vo.UserBatchVo;
+import me.zhengjie.modules.system.repository.RoleRepository;
 import me.zhengjie.modules.system.repository.UserAvatarRepository;
 import me.zhengjie.modules.system.repository.UserRepository;
 import me.zhengjie.modules.system.service.UserService;
@@ -18,6 +20,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,18 +42,24 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final StudentInfoRepository studentInfoRepository;
+    private final RoleRepository RoleRepository ;
     private final UserMapper userMapper;
     private final RedisUtils redisUtils;
     private final UserAvatarRepository userAvatarRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${file.avatar}")
     private String avatar;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, RedisUtils redisUtils, UserAvatarRepository userAvatarRepository) {
+    public UserServiceImpl(UserRepository userRepository, StudentInfoRepository studentInfoRepository, me.zhengjie.modules.system.repository.RoleRepository roleRepository, UserMapper userMapper, RedisUtils redisUtils, UserAvatarRepository userAvatarRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.studentInfoRepository = studentInfoRepository;
+        RoleRepository = roleRepository;
         this.userMapper = userMapper;
         this.redisUtils = redisUtils;
         this.userAvatarRepository = userAvatarRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -133,6 +142,7 @@ public class UserServiceImpl implements UserService {
         user.setNickName(resources.getNickName());
         user.setPhone(resources.getPhone());
         user.setSex(resources.getSex());
+        user.setEmail(resources.getEmail());
         userRepository.save(user);
     }
 
@@ -161,6 +171,52 @@ public class UserServiceImpl implements UserService {
         newList.add(map);
 
         return newList;
+    }
+
+    /**
+     * 批量新增
+     * @param userbatch
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object batchCreate(List<UserBatchVo> userBatchVos) {
+
+        List aaa=new ArrayList();
+        for (int i = 0; i < userBatchVos.size(); i++) {
+            User user=new User();
+            UserBatchVo batch = userBatchVos.get(i);
+            String username=batch.getUsername();
+            String email=batch.getEmail();
+            Boolean enbaled=true;
+            String password=passwordEncoder.encode("123456");
+            String phone=batch.getPhone();
+            Dept dept=new Dept();
+            dept.setId(Long.valueOf("17"));
+            Job job=new Job();
+            job.setId(Long.valueOf("15"));
+//            Long dept=Long.valueOf("17");
+//            Long job =Long.valueOf("15");
+            String nickname=batch.getNickName();
+            String sex=batch.getSex();
+            System.out.println("--------");
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setEnabled(enbaled);
+            user.setPhone(phone);
+            user.setDept(dept);
+            user.setJob(job);
+            user.setNickName(nickname);
+            user.setSex(sex);
+            userRepository.save(user);
+            Long id =user.getId();
+            aaa.add(id);
+            studentInfoRepository.InsertStudentInfo(username,nickname,sex);
+            Long roled=Long.valueOf("3");
+            RoleRepository.insertUserId(id,roled);
+        }
+        System.out.println(aaa);
+        return  null;
     }
 
     @Override
