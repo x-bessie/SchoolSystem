@@ -108,4 +108,9 @@ public interface RoleService {
      * @return 权限信息
      */
     Collection<GrantedAuthority> mapToGrantedAuthorities(UserDto user);
+
+    /**
+     *根据user_id 插入数据
+     */
+    Object insertUserId(Long userId,Long roleId);
 }
