@@ -30,7 +30,7 @@ public class CourseInfoDto implements Serializable {
     private String classTeacher;
 
     /** 教师Id */
-    private Integer teacherId;
+    private String teacherId;
 
     /** 课程代码 */
     private String classCode;
