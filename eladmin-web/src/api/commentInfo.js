@@ -32,4 +32,12 @@ export function InsertCommentByStudent(data) {
   })
 }
 
-export default { add, edit, del, InsertCommentByStudent }
+export function queryCommentByStudent(data) {
+  return request({
+    url: 'api/commentInfo/queryCommentByStudent',
+    method: 'get',
+    params: data
+  })
+}
+
+export default { add, edit, del, InsertCommentByStudent, queryCommentByStudent }
