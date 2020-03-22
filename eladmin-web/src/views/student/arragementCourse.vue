@@ -138,7 +138,7 @@ export default {
       // console.log(data)
       if (this.teacherData.memo) {
         queryCommentByStudent({
-          class_id: data.course_id,
+          class_id: data.class_code,
           teacher_name: data.class_teacher,
           status: '1'
         }).then(res => {
@@ -155,8 +155,9 @@ export default {
           } else if (res.length === 0) {
             InsertCommentByStudent({
               username: data.username,
-              class_id: data.course_id,
+              class_id: data.class_code,
               teacher_name: data.class_teacher,
+              class_name: data.course_name,
               teacher_id: data.teacher_id,
               memo: data.memo
             }).then(res => {
