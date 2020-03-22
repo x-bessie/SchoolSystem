@@ -18,10 +18,13 @@
           <el-form-item label="学号" prop="username">
             <el-input v-model="form.username" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="课程id" prop="classId">
+          <el-form-item label="课程名称" prop="className">
+            <el-input v-model="form.className" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="课程代码" prop="classId">
             <el-input v-model="form.classId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="教师id" prop="teacherId">
+          <el-form-item label="教师工号" prop="teacherId">
             <el-input v-model="form.teacherId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="教师名称" prop="teacherName">
@@ -47,8 +50,9 @@
         <el-table-column type="selection" width="55" />
         <!-- <el-table-column v-if="columns.visible('id')" prop="id" label="id" /> -->
         <el-table-column v-if="columns.visible('username')" prop="username" label="学号" />
-        <el-table-column v-if="columns.visible('classId')" prop="classId" label="课程id" />
-        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师id" />
+        <el-table-column v-if="columns.visible('className')" prop="className" label="课程名称" />
+        <el-table-column v-if="columns.visible('classId')" prop="classId" label="课程代码" />
+        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师工号" />
         <el-table-column v-if="columns.visible('teacherName')" prop="teacherName" label="教师名称" />
         <el-table-column v-if="columns.visible('memo')" prop="memo" label="评价" />
         <el-table-column v-if="columns.visible('createtime')" prop="createtime" label="创建时间">
@@ -98,11 +102,14 @@ export default {
         username: [
           { required: true, message: '学号不能为空', trigger: 'blur' }
         ],
+        className: [
+          { required: true, message: '课程代码不能为空', trigger: 'blur' }
+        ],
         classId: [
-          { required: true, message: '课程id不能为空', trigger: 'blur' }
+          { required: true, message: '课程代码不能为空', trigger: 'blur' }
         ],
         teacherId: [
-          { required: true, message: '教师id不能为空', trigger: 'blur' }
+          { required: true, message: '教师工号不能为空', trigger: 'blur' }
         ],
         teacherName: [
           { required: true, message: '教师名称不能为空', trigger: 'blur' }
