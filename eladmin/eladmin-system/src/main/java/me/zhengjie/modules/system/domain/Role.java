@@ -46,6 +46,7 @@ public class Role implements Serializable {
     @Column(name = "permission")
     private String permission;
 
+
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;

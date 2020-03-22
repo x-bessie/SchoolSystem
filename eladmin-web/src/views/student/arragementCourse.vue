@@ -31,9 +31,10 @@
           <el-form-item label="评价指标">
             <el-input
               type="textarea"
+              :rows="6"
               :disabled="true"
               placeholder="1.备课充分，讲课认真，不随意掉停课，对学生要求严格。2.讲课内容准确熟练，教学重点难点突出。3.理论联系实际，能激发学生求职欲（专业技能熟练，示范准确，指导有力）4.教学语言精炼生动，教学仪态自然大方 5.注重启发，鼓励质疑，并给予思路引导"
-              style="min-height: 140px; width:300px;"
+              style="min-height: 140px; width:300px; height:140px;"
               label-width="60px"
             />
           </el-form-item>

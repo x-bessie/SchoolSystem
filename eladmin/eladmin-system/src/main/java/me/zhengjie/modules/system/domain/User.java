@@ -62,6 +62,7 @@ public class User implements Serializable {
     @Column(name = "last_password_reset_time")
     private Date lastPasswordResetTime;
 
+
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
     private Set<Role> roles;
@@ -69,6 +70,7 @@ public class User implements Serializable {
     @OneToOne
     @JoinColumn(name = "job_id")
     private Job job;
+
 
     @OneToOne
     @JoinColumn(name = "dept_id")
