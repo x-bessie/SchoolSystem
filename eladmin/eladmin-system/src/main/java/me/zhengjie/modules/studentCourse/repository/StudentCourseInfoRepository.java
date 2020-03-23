@@ -21,10 +21,9 @@ public interface StudentCourseInfoRepository extends JpaRepository<StudentCourse
      * @param userName
      * @return
      */
-    @Query(value = "select t.course_id,t.username,t.name,c.`name` as course_name,c.classtime,c.class_num,c.class_teacher," +
-            "c.teacher_id,c.class_code,c.tearm,c.school_year from " +
-            "(select  a.student_id ,a.course_id,a.pdate,b.username,b.name from " +
-            "student_course_info  as a, student_info  as b  where " +
-            " a.student_id=b.id and b.username= ?1 ) t,course_info as c   where c.id=t.course_id", nativeQuery = true)
+    @Query(value = "SELECT t.course_code,t.username,t. NAME,c.`name` AS course_name," +
+            "c.classtime,c.class_num,c.class_teacher,c.teacher_id,c.class_code,c.tearm, c.school_year " +
+            " FROM ( SELECT a.student_code, a.course_code, a.pdate,b.username, b. NAME  FROM student_course_info AS a,student_info AS b WHERE a.student_code = b.username  AND b.username = ?1 ) t," +
+            "course_info AS c  WHERE c.class_code = t.course_code ", nativeQuery = true)
     List<Map<String, Object>> getStudentInfoByUserName(String userName);
 }
