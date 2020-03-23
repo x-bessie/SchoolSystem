@@ -94,7 +94,10 @@ public class StudentCourseInfoServiceImpl implements StudentCourseInfoService {
         for (StudentCourseInfoDto studentCourseInfo : all) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put(" studentId", studentCourseInfo.getStudentId());
-            map.put(" courseId", studentCourseInfo.getCourseId());
+            map.put(" studentCode", studentCourseInfo.getStudentCode());
+            map.put(" studentName", studentCourseInfo.getStudentName());
+            map.put(" courseCode", studentCourseInfo.getCourseCode());
+            map.put(" courseName", studentCourseInfo.getCourseName());
             map.put(" pdate", studentCourseInfo.getPdate());
             map.put(" tearm", studentCourseInfo.getTearm());
             list.add(map);
