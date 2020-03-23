@@ -13,7 +13,13 @@ public class StudentCourseInfoDto implements Serializable {
 
     private Integer studentId;
 
-    private Integer courseId;
+    private String studentCode;
+
+    private String courseCode;
+
+    private String studentName;
+
+    private String courseName;
 
     private Timestamp pdate;
 
