@@ -18,12 +18,23 @@ import java.io.Serializable;
 public class StudentCourseInfo implements Serializable {
 
     @Column(name = "student_id",nullable = false)
-    @NotNull
     private Integer studentId;
 
-    @Column(name = "course_id",nullable = false)
+    @Column(name = "student_code",nullable = false)
     @NotNull
-    private Integer courseId;
+    private String studentCode;
+
+    @Column(name = "student_name",nullable = false)
+    @NotNull
+    private String studentName;
+
+    @Column(name = "course_code",nullable = false)
+    @NotNull
+    private String courseCode;
+
+    @Column(name="course_name",nullable = false)
+    @NotNull
+    private String courseName;
 
     @Column(name = "pdate")
     private Timestamp pdate;
