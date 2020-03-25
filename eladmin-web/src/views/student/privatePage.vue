@@ -5,6 +5,9 @@
       <!--学生个人信息-->
       <!--表单组件-->
       <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
+        <el-form-item label="学号">
+          <el-input v-model="form.username" :disabled="true" style="width: 370px;" />
+        </el-form-item>
         <el-form-item label="姓名">
           <el-input v-model="form.name" :disabled="true" style="width: 370px;" />
         </el-form-item>
