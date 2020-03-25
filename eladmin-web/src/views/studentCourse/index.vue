@@ -39,11 +39,20 @@
         width="500px"
       >
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="学生id" prop="studentId">
+          <!-- <el-form-item label="学生id" prop="studentId">
             <el-input v-model="form.studentId" style="width: 370px;" />
+          </el-form-item> -->
+          <el-form-item label="学号" prop="studentCode">
+            <el-input v-model="form.studentCode" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="课程id" prop="courseId">
-            <el-input v-model="form.courseId" style="width: 370px;" />
+          <el-form-item label="学生姓名" prop="studentName">
+            <el-input v-model="form.studentName" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="课程代码" prop="courseCode">
+            <el-input v-model="form.courseCode" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="课程名称" prop="courseName">
+            <el-input v-model="form.courseName" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="时间">
             <el-date-picker v-model="form.pdate" type="datetime" style="width: 370px;" />
@@ -71,8 +80,11 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
-        <el-table-column v-if="columns.visible('studentId')" prop="studentId" label="学生id" />
-        <el-table-column v-if="columns.visible('courseId')" prop="courseId" label="课程id" />
+        <!-- <el-table-column v-if="columns.visible('studentId')" prop="studentId" label="学生id" /> -->
+        <el-table-column v-if="columns.visible('studentCode')" prop="studentCode" label="学号" />
+        <el-table-column v-if="columns.visible('studentName')" prop="studentName" label="学生姓名" />
+        <el-table-column v-if="columns.visible('courseCode')" prop="courseCode" label="课程代码" />
+        <el-table-column v-if="columns.visible('courseName')" prop="courseName" label="课程名称" />
         <el-table-column v-if="columns.visible('pdate')" prop="pdate" label="时间">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.pdate) }}</span>
@@ -106,7 +118,7 @@ import pagination from '@crud/Pagination'
 
 // crud交由presenter持有
 const defaultCrud = CRUD({ title: '课程：学生课程', url: 'api/studentCourseInfo', sort: 'id,desc', crudMethod: { ...crudStudentCourseInfo }})
-const defaultForm = { studentId: null, courseId: null, pdate: null, tearm: null, id: null }
+const defaultForm = { studentId: null, studentCode: null, studentName: null, courseCode: null, courseName: null, pdate: null, tearm: null, id: null }
 export default {
   name: 'StudentCourseInfo',
   components: { pagination, crudOperation, rrOperation, udOperation },
@@ -119,15 +131,25 @@ export default {
         del: ['admin', 'studentCourseInfo:del']
       },
       rules: {
-        studentId: [
+        // studentId: [
+        //   { required: true, message: '不能为空', trigger: 'blur' }
+        // ],
+        studentCode: [
           { required: true, message: '不能为空', trigger: 'blur' }
         ],
-        courseId: [
+        studentName: [
+          { required: true, message: '不能为空', trigger: 'blur' }
+        ],
+        courseCode: [
+          { required: true, message: '不能为空', trigger: 'blur' }
+        ],
+        courseName: [
           { required: true, message: '不能为空', trigger: 'blur' }
         ]
+
       },
       queryTypeOptions: [
-        { key: 'studentId', display_name: 'studentId' }
+        { key: 'studentCode', display_name: '学号' }
       ]
     }
   },
