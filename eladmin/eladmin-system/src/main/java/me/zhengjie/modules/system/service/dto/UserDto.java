@@ -33,6 +33,8 @@ public class UserDto implements Serializable {
 
     private Date lastPasswordResetTime;
 
+    private String profession;
+
     @ApiModelProperty(hidden = true)
     private Set<RoleSmallDto> roles;
 
