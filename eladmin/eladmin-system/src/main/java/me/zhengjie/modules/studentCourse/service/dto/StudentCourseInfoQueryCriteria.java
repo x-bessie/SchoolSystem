@@ -13,5 +13,5 @@ public class StudentCourseInfoQueryCriteria{
 
     /** 模糊 */
     @Query(type = Query.Type.INNER_LIKE)
-    private Integer studentId;
+    private String studentCode;
 }
