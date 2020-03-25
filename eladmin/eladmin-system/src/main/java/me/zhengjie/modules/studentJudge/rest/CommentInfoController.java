@@ -77,12 +77,14 @@ public class CommentInfoController {
     @PostMapping(value = "/InsertCommentByStudent")
     public ResponseEntity<Object> InsertCommentByStudent(
             @RequestParam("username") String username,
-            @RequestParam("class_id") Integer class_id,
+            @RequestParam("class_id") String class_id,
             @RequestParam("teacher_name") String teacher_name,
-            @RequestParam("teacher_id") Integer teacher_id,
-            @RequestParam("memo") String memo
+            @RequestParam("teacher_id") String teacher_id,
+            @RequestParam("memo") String memo,
+            @RequestParam("class_name") String class_name
+
     ) {
-        commentInfoService.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo);
+        commentInfoService.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo,class_name);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -90,7 +92,7 @@ public class CommentInfoController {
     @ApiOperation("评价：评价之前的查询")
     @GetMapping(value = "/queryCommentByStudent")
     public ResponseEntity<Object> queryCommentByStudent(
-            @RequestParam("class_id") Integer class_id,
+            @RequestParam("class_id") String class_id,
             @RequestParam("teacher_name") String teacher_name,
             @RequestParam("status") String status
     ) {
