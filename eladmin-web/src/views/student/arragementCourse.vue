@@ -86,7 +86,7 @@ export default {
       tableData: [{
         username: '',
         course_name: '',
-        course_id: '',
+        course_code: '',
         classtime: '',
         class_num: '',
         class_teacher: '',
