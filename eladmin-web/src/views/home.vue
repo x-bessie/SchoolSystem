@@ -1,7 +1,7 @@
 <template>
   <el-table :data="tableData" stripe style="width: 100%">
-    <el-table-column prop="create_time" label="日期" width="180" :formatter="dateFormat" />
-    <el-table-column prop="title" label="标题" width="180" />
+    <el-table-column prop="create_time" label="日期" :formatter="dateFormat" />
+    <el-table-column prop="title" label="标题" />
     <el-table-column prop="content" label="内容" />
   </el-table>
 </template>
