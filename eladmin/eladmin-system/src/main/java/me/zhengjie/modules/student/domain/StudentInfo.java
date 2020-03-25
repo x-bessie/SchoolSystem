@@ -29,8 +29,8 @@ public class StudentInfo implements Serializable {
     private Integer age;
 
     /** 班级 */
-    @Column(name = "cid")
-    private Integer cid;
+    @Column(name = "profession")
+    private String profession;
 
     /** 身份证 */
     @Column(name = "IDNum")
