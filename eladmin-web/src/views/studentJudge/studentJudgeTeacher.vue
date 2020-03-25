@@ -5,7 +5,7 @@
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--学生课程表表格渲染-->
-      <el-table ref="table" :data="tableData" size="small" style="width: 100%;">
+      <el-table ref="table" :data="tableData" size="medium" style="width: 100%;">
         <el-table-column prop="username" label="学号" width="180" />
         <l-table-column prop="course_name" label="课程名称" width="180" />
         <el-table-column prop="teacherName" label="教师名称" width="180" />
@@ -46,7 +46,7 @@ export default {
       },
       form: [{
         username: '',
-        course_id: '',
+        course_Code: '',
         course_name: '',
         classtime: '',
         class_num: '',
