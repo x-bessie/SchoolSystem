@@ -54,9 +54,9 @@
           <!-- <el-form-item label="年龄" prop="age">
             <el-input v-model="form.age" style="width: 370px;" />
           </el-form-item>-->
-          <!-- <el-form-item label="班级" prop="cid">
-            <el-input v-model="form.cid" style="width: 370px;" />
-          </el-form-item> -->
+          <el-form-item label="专业" prop="profession">
+            <el-input v-model="form.profession" style="width: 370px;" />
+          </el-form-item>
           <el-form-item label="身份证">
             <el-input v-model="form.idnum" style="width: 370px;" />
           </el-form-item>
@@ -115,7 +115,7 @@
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
         <el-table-column v-if="columns.visible('sex')" prop="sex" label="性别" />
         <!-- <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" /> -->
-        <!-- <el-table-column v-if="columns.visible('cid')" prop="cid" label="班级" /> -->
+        <el-table-column v-if="columns.visible('profession')" prop="profession" label="专业" />
         <el-table-column v-if="columns.visible('idnum')" prop="idnum" label="身份证" />
         <el-table-column v-if="columns.visible('address')" prop="address" label="地址" />
         <el-table-column v-if="columns.visible('email')" prop="email" label="邮箱" />
