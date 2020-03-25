@@ -94,8 +94,9 @@ public class CommentInfoServiceImpl implements CommentInfoService {
         for (CommentInfoDto commentInfo : all) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("学号", commentInfo.getUsername());
-            map.put("课程id", commentInfo.getClassId());
-            map.put("教师id", commentInfo.getTeacherId());
+            map.put("课程代码", commentInfo.getClassId());
+            map.put("教师工号", commentInfo.getTeacherId());
+            map.put("课程名称", commentInfo.getClassName());
             map.put("教师名称", commentInfo.getTeacherName());
             map.put("评价", commentInfo.getMemo());
             map.put("创建时间", commentInfo.getCreatetime());
@@ -117,8 +118,8 @@ public class CommentInfoServiceImpl implements CommentInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void InsertCommentByStudent(String username, Integer class_id, String teacher_name, Integer teacher_id, String memo) {
-        commentInfoRepository.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo, new Date());
+    public void InsertCommentByStudent(String username, String class_id, String teacher_name, String teacher_id, String memo,String class_name) {
+        commentInfoRepository.InsertCommentByStudent(username, class_id, teacher_name, teacher_id, memo, class_name,new Date());
 
     }
 
@@ -130,7 +131,7 @@ public class CommentInfoServiceImpl implements CommentInfoService {
      * @param status
      */
     @Override
-    public Object queryCommentByStudent(Integer class_id, String teacher_name, String status) {
+    public Object queryCommentByStudent(String class_id, String teacher_name, String status) {
         List<Map<String, Object>> list = commentInfoRepository.queryCommentByStudent(class_id, teacher_name, status);
         if (list == null) {
             return "暂时本课程无成绩";
