@@ -20,7 +20,7 @@ public class StudentInfoDto implements Serializable {
     private Integer age;
 
     /** 班级 */
-    private Integer cid;
+    private String  profession ;
 
     /** 身份证 */
     private String idnum;
