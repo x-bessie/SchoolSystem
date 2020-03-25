@@ -115,9 +115,11 @@ public class StudentInfoController {
     public ResponseEntity<Object> InsertStudentInfo(
             @RequestParam("username") String username,
             @RequestParam("name") String name,
-            @RequestParam("sex") String sex
+            @RequestParam("sex") String sex,
+            @RequestParam("profession") String profession
+
     ) {
-        studentInfoService.InsertStudentInfo( username, name, sex);
+        studentInfoService.InsertStudentInfo( username, name, sex,profession);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
