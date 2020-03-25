@@ -131,6 +131,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(resources.getPhone());
         user.setNickName(resources.getNickName());
         user.setSex(resources.getSex());
+        user.setProfession(resources.getProfession());
         userRepository.save(user);
     }
 
@@ -198,6 +199,7 @@ public class UserServiceImpl implements UserService {
 //            Long job =Long.valueOf("15");
             String nickname=batch.getNickName();
             String sex=batch.getSex();
+            String profession=batch.getProfession();
             System.out.println("--------");
             user.setUsername(username);
             user.setEmail(email);
@@ -208,10 +210,11 @@ public class UserServiceImpl implements UserService {
             user.setJob(job);
             user.setNickName(nickname);
             user.setSex(sex);
+            user.setProfession(profession);
             userRepository.save(user);
             Long id =user.getId();
             aaa.add(id);
-            studentInfoRepository.InsertStudentInfo(username,nickname,sex);
+            studentInfoRepository.InsertStudentInfo(username,nickname,sex,profession);
             Long roled=Long.valueOf("3");
             RoleRepository.insertUserId(id,roled);
         }
@@ -294,6 +297,7 @@ public class UserServiceImpl implements UserService {
             map.put("岗位", userDTO.getJob().getName());
             map.put("最后修改密码的时间", userDTO.getLastPasswordResetTime());
             map.put("创建日期", userDTO.getCreateTime());
+            map.put("专业", userDTO.getProfession());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
