@@ -18,9 +18,9 @@ import java.util.Map;
 @Repository
 public interface CommentInfoRepository extends JpaRepository<CommentInfo, Integer>, JpaSpecificationExecutor<CommentInfo> {
     @Modifying
-    @Query(value = "insert ignore into comment_info (username,class_id,teacher_name,teacher_id,memo,createtime) values (?1,?2,?3,?4,?5,?6);", nativeQuery = true)
-    void InsertCommentByStudent(String username, Integer class_id, String teacher_name, Integer teacher_id, String memo, Date createtime);
+    @Query(value = "insert ignore into comment_info (username,class_id,teacher_name,teacher_id,memo,class_name,createtime) values (?1,?2,?3,?4,?5,?6,?7);", nativeQuery = true)
+    void InsertCommentByStudent(String username, String class_id, String teacher_name, String teacher_id, String memo, String class_name, Date createtime);
 
     @Query(value = "select * from comment_info  where class_id=?1 and teacher_name=?2 and status=?3 ", nativeQuery = true)
-    List<Map<String, Object>> queryCommentByStudent(Integer class_id, String teacher_name, String status);
+    List<Map<String, Object>> queryCommentByStudent(String class_id, String teacher_name, String status);
 }
