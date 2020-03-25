@@ -28,15 +28,15 @@ public class CommentInfo implements Serializable {
     @NotBlank
     private String username;
 
-    /** 课程id */
+    /** 课程代码 */
     @Column(name = "class_id",nullable = false)
     @NotNull
-    private Integer classId;
+    private String classId;
 
-    /** 教师id */
+    /** 教师工号 */
     @Column(name = "teacher_id",nullable = false)
     @NotNull
-    private Integer teacherId;
+    private String teacherId;
 
     /** 教师名称 */
     @Column(name = "teacher_name",nullable = false)
@@ -54,6 +54,10 @@ public class CommentInfo implements Serializable {
     /** 状态 */
     @Column(name = "status")
     private Integer status;
+
+    /** 课程名称 */
+    @Column(name = "class_name")
+    private String className;
 
     public void copy(CommentInfo source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
