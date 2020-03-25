@@ -93,7 +93,6 @@ public class StudentInfoServiceImpl implements StudentInfoService {
             map.put("姓名", studentInfo.getName());
             map.put("性别", studentInfo.getSex());
             map.put("年龄", studentInfo.getAge());
-            map.put("班级", studentInfo.getCid());
             map.put("身份证", studentInfo.getIdnum());
             map.put("地址", studentInfo.getAddress());
             map.put("邮箱", studentInfo.getEmail());
@@ -103,8 +102,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
             map.put("父母联系方式", studentInfo.getParentnum());
             map.put("辅导员", studentInfo.getTeachername());
             map.put("导师", studentInfo.getGuiderteacher());
-            map.put(" userId", studentInfo.getUserId());
-            map.put(" username", studentInfo.getUsername());
+            map.put("userId", studentInfo.getUserId());
+            map.put("username", studentInfo.getUsername());
+            map.put("专业", studentInfo.getProfession());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
@@ -155,8 +155,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void InsertStudentInfo(String username, String name, String sex) {
-        studentInfoRepository.InsertStudentInfo(username, name, sex);
+    public void InsertStudentInfo(String username, String name, String sex, String profession) {
+        studentInfoRepository.InsertStudentInfo(username, name, sex, profession);
 
     }
 
