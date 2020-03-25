@@ -89,5 +89,5 @@ public interface StudentInfoService {
      * @param name
      * @param sex
      */
-    void InsertStudentInfo( String username, String name, String sex);
+    void InsertStudentInfo( String username, String name, String sex,String profession);
 }
