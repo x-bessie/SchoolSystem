@@ -22,4 +22,8 @@ public class GradeInfoQueryCriteria{
     /** 模糊 */
     @Query(type = Query.Type.INNER_LIKE)
     private String username;
+
+    /** 模糊 */
+    @Query(type = Query.Type.INNER_LIKE)
+    private String studentName;
 }
