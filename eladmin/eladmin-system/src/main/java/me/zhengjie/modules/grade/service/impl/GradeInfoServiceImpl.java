@@ -125,7 +125,6 @@ public class GradeInfoServiceImpl implements GradeInfoService {
     /**
      * 成绩登记：教师登记成绩
      *
-     * @param class_id
      * @param class_code
      * @param teacher_id
      * @param teacher_name
@@ -137,8 +136,8 @@ public class GradeInfoServiceImpl implements GradeInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void InsertStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status) {
-        gradeInfoRepository.InsertStudentGrade(class_id, class_code, teacher_id, teacher_name, grade, course_name, username, student_name, status, new Date());
+    public void InsertStudentGrade( String class_code, String teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status) {
+        gradeInfoRepository.InsertStudentGrade( class_code, teacher_id, teacher_name, grade, course_name, username, student_name, status, new Date());
     }
 
     /**
@@ -173,8 +172,8 @@ public class GradeInfoServiceImpl implements GradeInfoService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status,Integer id) {
-        gradeInfoRepository.updateStudentGrade(class_id, class_code, teacher_id, teacher_name, grade, course_name, username, student_name, status,new Date(),id);
+    public void updateStudentGrade( String class_code, String teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status,Integer id) {
+        gradeInfoRepository.updateStudentGrade( class_code, teacher_id, teacher_name, grade, course_name, username, student_name, status,new Date(),id);
     }
 
     /**
