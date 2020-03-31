@@ -24,7 +24,6 @@ public class GradeInfo implements Serializable {
 
     /** 课程id */
     @Column(name = "class_id",nullable = false)
-    @NotNull
     private Integer classId;
 
     /** 课程代码 */
@@ -32,9 +31,9 @@ public class GradeInfo implements Serializable {
     @NotBlank
     private String classCode;
 
-    /** 教师id */
+    /** 教师工号*/
     @Column(name = "teacher_id")
-    private Integer teacherId;
+    private String teacherId;
 
     /** 教师名称 */
     @Column(name = "teacher_name")

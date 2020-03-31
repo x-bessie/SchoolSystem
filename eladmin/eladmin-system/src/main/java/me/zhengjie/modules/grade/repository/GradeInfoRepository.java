@@ -17,22 +17,22 @@ import java.util.Map;
  */
 @Repository
 public interface GradeInfoRepository extends JpaRepository<GradeInfo, Integer>, JpaSpecificationExecutor<GradeInfo> {
-    @Query(value = "SELECT a.* FROM course_info AS a, teachers_info AS b WHERE a.teacher_id=b.id  AND b.teacherid= ?1 and status=1", nativeQuery = true)
+    @Query(value = "SELECT a.* FROM course_info AS a, teachers_info AS b WHERE a.teacher_id = b.teacherid  AND b.teacherid= ?1 and status=1", nativeQuery = true)
     List<Map<String, Object>> getTeacherCourse(String username);
 
     @Modifying
-    @Query(value = "INSERT IGNORE  INTO grade_info (class_id,class_code,teacher_id,teacher_name,grade,course_name,username,student_name,status,pdate) " +
-            " VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10)", nativeQuery = true)
-    void InsertStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name, Float grade,
+    @Query(value = "INSERT IGNORE  INTO grade_info (class_code,teacher_id,teacher_name,grade,course_name,username,student_name,status,pdate) " +
+            " VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)
+    void InsertStudentGrade(String class_code, String teacher_id, String teacher_name, Float grade,
                             String course_name, String username, String student_name, Integer status, Date pdate);
 
     @Query(value = "select * from grade_info  where username=?1  and class_code=?2 ", nativeQuery = true)
     List<Map<String, Object>> getCourseGrade(String username, String class_code);
 
     @Modifying
-    @Query(value = "UPDATE grade_info SET class_id = ?1, class_code = ?2,  teacher_id = ?3,  teacher_name = ?4, " +
-            "grade = ?5, course_name = ?6, username = ?7, student_name = ?8, STATUS = ?9,  pdate = ?10  WHERE id=?11", nativeQuery = true)
-    void updateStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name,
+    @Query(value = "UPDATE grade_info SET  class_code = ?1,  teacher_id = ?2,  teacher_name = ?3, " +
+            "grade = ?4, course_name = ?5, username = ?6, student_name = ?7, STATUS = ?8,  pdate = ?9  WHERE id=?10", nativeQuery = true)
+    void updateStudentGrade( String class_code, String teacher_id, String teacher_name,
                             Float grade, String course_name, String username, String student_name, Integer status, Date pdate, Integer id);
 
     @Query(value = "select * from grade_info where username=?1", nativeQuery = true)
