@@ -15,29 +15,29 @@
       <!--表单组件-->
       <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="课程id" prop="classId">
-            <el-input v-model="form.classId" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="课程代码" prop="classCode">
-            <el-input v-model="form.classCode" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="教师id">
-            <el-input v-model="form.teacherId" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="教师名称">
-            <el-input v-model="form.teacherName" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="分数" prop="grade">
-            <el-input v-model="form.grade" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="课程名称">
-            <el-input v-model="form.courseName" style="width: 370px;" />
-          </el-form-item>
           <el-form-item label="学号" prop="username">
             <el-input v-model="form.username" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="姓名" prop="studentName">
             <el-input v-model="form.studentName" style="width: 370px;" />
+          </el-form-item>
+          <!-- <el-form-item label="课程id" prop="classId">
+            <el-input v-model="form.classId" style="width: 370px;" />
+          </el-form-item> -->
+          <el-form-item label="课程代码" prop="classCode">
+            <el-input v-model="form.classCode" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="课程名称">
+            <el-input v-model="form.courseName" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="分数" prop="grade">
+            <el-input v-model="form.grade" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="教师工号">
+            <el-input v-model="form.teacherId" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="教师名称">
+            <el-input v-model="form.teacherName" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="时间">
             <el-date-picker v-model="form.pdate" type="datetime" style="width: 370px;" />
@@ -58,14 +58,14 @@
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('id')" prop="id" label="id" />
-        <el-table-column v-if="columns.visible('classId')" prop="classId" label="课程id" />
-        <el-table-column v-if="columns.visible('classCode')" prop="classCode" label="课程代码" />
-        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师id" />
-        <el-table-column v-if="columns.visible('teacherName')" prop="teacherName" label="教师名称" />
-        <el-table-column v-if="columns.visible('grade')" prop="grade" label="分数" />
-        <el-table-column v-if="columns.visible('courseName')" prop="courseName" label="课程名称" />
         <el-table-column v-if="columns.visible('username')" prop="username" label="学号" />
         <el-table-column v-if="columns.visible('studentName')" prop="studentName" label="姓名" />
+        <!-- <el-table-column v-if="columns.visible('classId')" prop="classId" label="课程id" /> -->
+        <el-table-column v-if="columns.visible('classCode')" prop="classCode" label="课程代码" />
+        <el-table-column v-if="columns.visible('courseName')" prop="courseName" label="课程名称" />
+        <el-table-column v-if="columns.visible('grade')" prop="grade" label="分数" />
+        <el-table-column v-if="columns.visible('teacherId')" prop="teacherId" label="教师工号" />
+        <el-table-column v-if="columns.visible('teacherName')" prop="teacherName" label="教师名称" />
         <el-table-column v-if="columns.visible('pdate')" prop="pdate" label="时间">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.pdate) }}</span>
@@ -110,9 +110,9 @@ export default {
         del: ['admin', 'gradeInfo:del']
       },
       rules: {
-        classId: [
-          { required: true, message: '课程id不能为空', trigger: 'blur' }
-        ],
+        // classId: [
+        //   { required: true, message: '课程id不能为空', trigger: 'blur' }
+        // ],
         classCode: [
           { required: true, message: '课程代码不能为空', trigger: 'blur' }
         ],
@@ -127,8 +127,8 @@ export default {
         ]
       },
       queryTypeOptions: [
-        { key: 'classCode', display_name: '课程代码' },
-        { key: 'courseName', display_name: '课程名称' }
+        { key: 'username', display_name: '学号' },
+        { key: 'studentName', display_name: '姓名' }
       ]
     }
   },

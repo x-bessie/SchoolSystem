@@ -68,12 +68,12 @@
           </div>
           <crudOperation show :permission="permission" />
           <input
-              ref="excel-upload-input"
-              class="excel-upload-input"
-              type="file"
-              accept=".xlsx, .xls"
-              @change="handleClick"
-            />
+            ref="excel-upload-input"
+            class="excel-upload-input"
+            type="file"
+            accept=".xlsx, .xls"
+            @change="handleClick"
+          >
         </div>
         <el-dialog
           title="导入数据"
@@ -99,14 +99,14 @@
         <!--我这里要显示相关数据-->
         <!-- <el-row class="panel-title">
           <div class="fr"> -->
-            <!-- <input
+        <!-- <input
               ref="excel-upload-input"
               class="excel-upload-input"
               type="file"
               accept=".xlsx, .xls"
               @change="handleClick"
             /> -->
-          <!-- </div> -->
+        <!-- </div> -->
         <!-- </el-row> -->
         <!--表单渲染-->
         <el-dialog
@@ -136,6 +136,9 @@
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="form.email" />
+            </el-form-item>
+            <el-form-item label="专业" prop="profession">
+              <el-input v-model="form.profession" />
             </el-form-item>
             <el-form-item label="部门" prop="dept.id">
               <treeselect
@@ -266,6 +269,13 @@
             </template>
           </el-table-column>
           <el-table-column
+            v-if="columns.visible('profession')"
+            :show-overflow-tooltip="true"
+            width="125"
+            prop="profession"
+            label="专业"
+          />
+          <el-table-column
             v-if="columns.visible('createTime')"
             :show-overflow-tooltip="true"
             prop="createTime"
@@ -320,8 +330,8 @@ import { batchCreate } from '@/api/system/user'
 
 let userRoles = []
 // crud交由presenter持有
-const defaultCrud = CRUD({ title: '用户', url: 'api/users', crudMethod: { ...crudUser } })
-const defaultForm = { id: null, username: null, nickName: null, sex: '男', email: null, enabled: 'false', roles: [], job: { id: null }, dept: { id: null }, phone: null }
+const defaultCrud = CRUD({ title: '用户', url: 'api/users', crudMethod: { ...crudUser }})
+const defaultForm = { id: null, username: null, nickName: null, sex: '男', email: null, enabled: 'false', roles: [], job: { id: null }, dept: { id: null }, phone: null, profession: null }
 export default {
   name: 'User',
   components: { Treeselect, crudOperation, rrOperation, udOperation, pagination },
@@ -393,7 +403,7 @@ export default {
       this.crud.msg.add = '新增成功，默认密码：123456'
     })
   },
-  mounted: function () {
+  mounted: function() {
     const that = this
     window.onresize = function temp() {
       that.height = document.documentElement.clientHeight - 180 + 'px;'
@@ -402,7 +412,7 @@ export default {
   methods: {
     changeRole(value) {
       userRoles = []
-      value.forEach(function (data, index) {
+      value.forEach(function(data, index) {
         const role = { id: data }
         userRoles.push(role)
       })
@@ -416,13 +426,13 @@ export default {
     afterErrorMethod(crud) {
       // 恢复select
       const initRoles = []
-      userRoles.forEach(function (role, index) {
+      userRoles.forEach(function(role, index) {
         initRoles.push(role.id)
       })
       crud.form.roles = initRoles
     },
     deleteTag(value) {
-      userRoles.forEach(function (data, index) {
+      userRoles.forEach(function(data, index) {
         if (data.id === value) {
           userRoles.splice(index, value)
         }
@@ -440,7 +450,7 @@ export default {
       this.getJobs(this.form.dept.id)
       userRoles = []
       const roles = []
-      form.roles.forEach(function (role, index) {
+      form.roles.forEach(function(role, index) {
         roles.push(role.id)
         // 初始化编辑时候的角色
         const rol = { id: role.id }
@@ -636,7 +646,7 @@ export default {
     },
     processTree(parent, my) {
       const self = this
-      const $map = function (objtree) {
+      const $map = function(objtree) {
         // 第一层
         if (parent === objtree.name) {
           // 虚拟节点的children有数据
@@ -707,9 +717,9 @@ export default {
     },
     file2Xce(file) {
       const self = this
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         const reader = new FileReader()
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           const data = e.target.result
           self.wb = XLSX.read(data, { type: 'binary' })
           console.log('binary格式是：', self.wb)
