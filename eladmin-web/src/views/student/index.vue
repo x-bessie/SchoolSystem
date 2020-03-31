@@ -51,9 +51,6 @@
               <el-option label="女" value="女" />
             </el-select>
           </el-form-item>
-          <!-- <el-form-item label="年龄" prop="age">
-            <el-input v-model="form.age" style="width: 370px;" />
-          </el-form-item>-->
           <el-form-item label="专业" prop="profession">
             <el-input v-model="form.profession" style="width: 370px;" />
           </el-form-item>
@@ -69,9 +66,6 @@
           <el-form-item label="兴趣爱好" prop="hobby">
             <el-input v-model="form.hobby" style="width: 370px;" />
           </el-form-item>
-          <!-- <el-form-item label="userId" prop="userId">
-            <el-input v-model="form.userId" style="width: 370px;" />
-          </el-form-item> -->
           <el-form-item label="导师" prop="guiderteacher">
             <el-input v-model="form.guiderteacher" style="width: 370px;" />
           </el-form-item>
@@ -103,9 +97,6 @@
         @selection-change="crud.selectionChangeHandler"
       >
         <el-table-column type="selection" width="55" />
-        <!-- <el-table-column v-if="columns.visible('userId')" prop="userId" label="userId"> -->
-        <!-- <template slot-scope="scope">{{ scope.row.userId }}</template>
-        </el-table-column> -->
         <el-table-column
           v-if="columns.visible('username')"
           prop="username"
@@ -114,7 +105,6 @@
         />
         <el-table-column v-if="columns.visible('name')" prop="name" label="姓名" />
         <el-table-column v-if="columns.visible('sex')" prop="sex" label="性别" />
-        <!-- <el-table-column v-if="columns.visible('age')" prop="age" label="年龄" /> -->
         <el-table-column v-if="columns.visible('profession')" prop="profession" label="专业" />
         <el-table-column v-if="columns.visible('idnum')" prop="idnum" label="身份证" />
         <el-table-column v-if="columns.visible('address')" prop="address" label="地址" />
@@ -176,9 +166,6 @@ export default {
         del: ['admin', 'studentInfo:del']
       },
       rules: {
-        // userId: [
-        //   { required: true, message: '不能为空', trigger: 'blur' }
-        // ],
         username: [
           { required: true, message: '请输入学号', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
@@ -190,9 +177,12 @@ export default {
         name: [
           { required: true, message: '姓名不能为空', trigger: 'blur' }
         ],
-        // cid: [
-        //   { required: true, message: '班级不能为空', trigger: 'blur' }
-        // ],
+        sex: [
+          { required: true, message: '性别不能为空', trigger: 'blur' }
+        ],
+        profession: [
+          { required: true, message: '专业不能为空', trigger: 'blur' }
+        ],
         guiderteacher: [
           { required: true, message: '导师不能为空', trigger: 'blur' }
         ],
@@ -202,7 +192,7 @@ export default {
       },
       queryTypeOptions: [
         { key: 'name', display_name: '姓名' },
-        // { key: 'userId', display_name: 'userId' },
+        { key: 'profession', display_name: '专业' },
         { key: 'username', display_name: '学号' }
       ]
     }
