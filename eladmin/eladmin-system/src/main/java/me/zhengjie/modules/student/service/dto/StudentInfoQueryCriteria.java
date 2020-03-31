@@ -19,9 +19,9 @@ public class StudentInfoQueryCriteria{
     @Query(type = Query.Type.INNER_LIKE)
     private Long userId;
 
-
-    @Query(propName="id",joinName = "user")
-    private Long studentMessage;
+    /** 模糊 */
+    @Query(type = Query.Type.INNER_LIKE)
+    private String profession;
 
     /** 模糊 */
     @Query(type = Query.Type.INNER_LIKE)
