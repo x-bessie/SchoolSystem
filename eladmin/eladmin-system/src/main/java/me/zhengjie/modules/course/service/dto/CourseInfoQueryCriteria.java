@@ -39,4 +39,5 @@ public class CourseInfoQueryCriteria {
     /** 精确 */
     @Query
     private Integer status;
+
 }
