@@ -41,11 +41,16 @@
           <el-form-item label="评价">
             <!-- <el-input v-model="teacherData.memo" style="width: 300px;" /> -->
             <el-select v-model="teacherData.memo" placeholder="评价分数" style="width: 300px;">
-              <el-option :label="90" :value="90" />
-              <el-option :label="80" :value="80" />
-              <el-option :label="70" :value="70" />
-              <el-option :label="60" :value="60" />
-              <el-option :label="50" :value="50" />
+              <el-option :label="10" :value="10" />
+              <el-option :label="9" :value="9" />
+              <el-option :label="8" :value="8" />
+              <el-option :label="7" :value="7" />
+              <el-option :label="6" :value="6" />
+              <el-option :label="5" :value="5" />
+              <el-option :label="4" :value="4" />
+              <el-option :label="3" :value="3" />
+              <el-option :label="2" :value="2" />
+              <el-option :label="1" :value="1" />
             </el-select>
           </el-form-item>
         </el-form>
