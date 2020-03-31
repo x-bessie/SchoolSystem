@@ -90,7 +90,7 @@ public class TeachersInfoController {
     @GetMapping(value = "/getTeacherCourseToSeeStudent")
     @Log("教师查询：查询课程下的学生")
     @ApiOperation("教师查询：查询课程下的学生")
-    public ResponseEntity<Object> getTeacherCourseToSeeStudent(@RequestParam("teacher_id") Integer teacher_id, @RequestParam("class_code") String class_code) {
+    public ResponseEntity<Object> getTeacherCourseToSeeStudent(@RequestParam("teacher_id") String teacher_id, @RequestParam("class_code") String class_code) {
         return new ResponseEntity<>(teachersInfoService.getTeacherCourseToSeeStudent(teacher_id, class_code), HttpStatus.OK);
     }
 
