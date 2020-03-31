@@ -86,7 +86,7 @@ public interface TeachersInfoService {
      * @param class_code
      * @return
      */
-    Object getTeacherCourseToSeeStudent(Integer teacher_id, String class_code);
+    Object getTeacherCourseToSeeStudent(String teacher_id, String class_code);
 
     /**
      * 教师查询：教师个人信息查询
