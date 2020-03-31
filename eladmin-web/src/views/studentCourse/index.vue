@@ -131,9 +131,6 @@ export default {
         del: ['admin', 'studentCourseInfo:del']
       },
       rules: {
-        // studentId: [
-        //   { required: true, message: '不能为空', trigger: 'blur' }
-        // ],
         studentCode: [
           { required: true, message: '不能为空', trigger: 'blur' }
         ],
@@ -149,7 +146,8 @@ export default {
 
       },
       queryTypeOptions: [
-        { key: 'studentCode', display_name: '学号' }
+        { key: 'courseCode', display_name: '课程代码' },
+        { key: 'courseName', display_name: '课程名称' }
       ]
     }
   },
