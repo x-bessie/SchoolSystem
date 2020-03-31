@@ -82,7 +82,7 @@ public interface GradeInfoService {
      * @param student_name
      * @param status
      */
-    void InsertStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name, Float grade,
+    void InsertStudentGrade(String class_code, String teacher_id, String teacher_name, Float grade,
                             String course_name, String username, String student_name, Integer status);
 
     /**
@@ -105,7 +105,7 @@ public interface GradeInfoService {
      * @param student_name
      * @param status
      */
-    void updateStudentGrade(Integer class_id, String class_code, Integer teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status,Integer id);
+    void updateStudentGrade( String class_code, String teacher_id, String teacher_name, Float grade, String course_name, String username, String student_name, Integer status,Integer id);
 
     /*
     学生查询成绩
