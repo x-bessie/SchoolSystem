@@ -14,4 +14,11 @@ public class StudentCourseInfoQueryCriteria{
     /** 模糊 */
     @Query(type = Query.Type.INNER_LIKE)
     private String studentCode;
+
+    /** 模糊 */
+    @Query(type = Query.Type.INNER_LIKE)
+    private String courseCode;
+    /** 模糊 */
+    @Query(type = Query.Type.INNER_LIKE)
+    private String courseName;
 }
