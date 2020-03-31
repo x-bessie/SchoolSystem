@@ -19,8 +19,8 @@ public class GradeInfoDto implements Serializable {
     /** 课程代码 */
     private String classCode;
 
-    /** 教师id */
-    private Integer teacherId;
+    /** 教师工号*/
+    private String teacherId;
 
     /** 教师名称 */
     private String teacherName;
