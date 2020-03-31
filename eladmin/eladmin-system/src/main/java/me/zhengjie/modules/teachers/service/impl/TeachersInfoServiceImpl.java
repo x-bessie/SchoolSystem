@@ -132,7 +132,7 @@ public class TeachersInfoServiceImpl implements TeachersInfoService {
      * @return
      */
     @Override
-    public Object getTeacherCourseToSeeStudent(Integer teacher_id, String class_code) {
+    public Object getTeacherCourseToSeeStudent(String teacher_id, String class_code) {
 
         List<Map<String, Object>> list = teachersInfoRepository.getTeacherCourseToSeeStudent(teacher_id, class_code);
         if (list == null) {
