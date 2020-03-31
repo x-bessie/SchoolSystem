@@ -116,6 +116,7 @@ export default {
       studentGrade: [{
         id: '',
         class_code: '',
+        // 教师id改为教师工号
         teacher_id: '',
         name: '',
         class_teacher: '',
@@ -175,7 +176,7 @@ export default {
           // 如果有数据
           if (res[0]) {
             updateStudentGrade({
-              class_id: data.id,
+              // class_id: data.id,
               class_code: data.class_code,
               teacher_id: data.teacher_id,
               teacher_name: data.class_teacher,
@@ -197,7 +198,7 @@ export default {
             })
           } else {
             InsertStudentGrade({
-              class_id: data.id,
+              // class_id: data.id,
               class_code: data.class_code,
               teacher_id: data.teacher_id,
               teacher_name: data.class_teacher,
