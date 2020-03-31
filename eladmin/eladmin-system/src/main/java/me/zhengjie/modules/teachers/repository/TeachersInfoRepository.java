@@ -33,8 +33,8 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
      * @param class_code
      * @return
      */
-    @Query(value = "SELECT t.*,c.username,c.name as student_name  FROM ( SELECT a.*, b.student_id  FROM course_info AS a, student_course_info AS b  WHERE a.teacher_id = ?1 AND a.id = b.course_id  AND a.class_code = ?2 ) t  ,student_info c where t.student_id=c.id", nativeQuery = true)
-    List<Map<String, Object>> getTeacherCourseToSeeStudent(Integer teacher_id, String class_code);
+    @Query(value = "SELECT t.*,c.username,c.name as student_name  FROM ( SELECT a.*, b.student_id  FROM course_info AS a, student_course_info AS b  WHERE a.teacher_id = ?1 AND a.class_code = b.course_code  AND a.class_code = ?2 ) t  ,student_info c where t.student_id=c.id", nativeQuery = true)
+    List<Map<String, Object>> getTeacherCourseToSeeStudent(String teacher_id, String class_code);
 
     /**
      * 教师查询：教师个人信息查询
