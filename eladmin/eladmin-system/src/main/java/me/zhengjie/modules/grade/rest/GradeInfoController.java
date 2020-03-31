@@ -83,9 +83,9 @@ public class GradeInfoController {
     @ApiOperation("成绩登记：教师登记成绩")
     @PostMapping(value = "/InsertStudentGrade")
     public ResponseEntity<Object> InsertStudentGrade(
-            @RequestParam("class_id") Integer class_id,
+//            @RequestParam("class_id") Integer class_id,
             @RequestParam("class_code") String class_code,
-            @RequestParam("teacher_id") Integer teacher_id,
+            @RequestParam("teacher_id") String teacher_id,
             @RequestParam("teacher_name") String teacher_name,
             @RequestParam("grade") Float grade,
             @RequestParam("course_name") String course_name,
@@ -93,7 +93,7 @@ public class GradeInfoController {
             @RequestParam("student_name") String student_name,
             @RequestParam("status") Integer status
     ) {
-        gradeInfoService.InsertStudentGrade(class_id, class_code, teacher_id, teacher_name, grade, course_name,
+        gradeInfoService.InsertStudentGrade(class_code, teacher_id, teacher_name, grade, course_name,
                 username, student_name, status);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -112,9 +112,9 @@ public class GradeInfoController {
     @ApiOperation("成绩登记：教师更新成绩")
     @PostMapping(value = "/updateStudentGrade")
     public ResponseEntity<Object> updateStudentGrade(
-            @RequestParam("class_id") Integer class_id,
+//            @RequestParam("class_id") Integer class_id,
             @RequestParam("class_code") String class_code,
-            @RequestParam("teacher_id") Integer teacher_id,
+            @RequestParam("teacher_id") String teacher_id,
             @RequestParam("teacher_name") String teacher_name,
             @RequestParam("grade") Float grade,
             @RequestParam("course_name") String course_name,
@@ -123,7 +123,7 @@ public class GradeInfoController {
             @RequestParam("status") Integer status,
             @RequestParam("id") Integer id
     ) {
-        gradeInfoService.updateStudentGrade(class_id, class_code, teacher_id, teacher_name, grade, course_name,
+        gradeInfoService.updateStudentGrade( class_code, teacher_id, teacher_name, grade, course_name,
                 username, student_name, status, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
