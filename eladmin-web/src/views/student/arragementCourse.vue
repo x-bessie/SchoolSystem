@@ -143,6 +143,7 @@ export default {
       // console.log(data)
       if (this.teacherData.memo) {
         queryCommentByStudent({
+          username: data.username,
           class_id: data.class_code,
           teacher_name: data.class_teacher,
           status: '1'
