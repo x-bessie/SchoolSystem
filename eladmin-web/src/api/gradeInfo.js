@@ -61,4 +61,12 @@ export function getCourseGradeByStudent(data) {
     data
   })
 }
-export default { add, edit, del, getTeacherCourse, InsertStudentGrade, getCourseGrade, updateStudentGrade, getCourseGradeByStudent }
+
+export function getTeacherCourseSelect(data) {
+  return request({
+    url: 'api/gradeInfo/getTeacherCourseSelect',
+    method: 'get',
+    data
+  })
+}
+export default { add, edit, del, getTeacherCourse, InsertStudentGrade, getCourseGrade, updateStudentGrade, getCourseGradeByStudent, getTeacherCourseSelect }
