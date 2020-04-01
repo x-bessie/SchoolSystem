@@ -63,4 +63,12 @@ export function InsertTeacherInfo(data) {
     params: data
   })
 }
-export default { add, edit, del, getTeacherCourseMessage, getTeacherCourseToSeeStudent, getTeachersInfoByUserName, updateTeacherInfo, InsertTeacherInfo }
+
+export function getTeachersGrade(data) {
+  return request({
+    url: 'api/teachersInfo/getTeachersGrade',
+    method: 'get',
+    data
+  })
+}
+export default { add, edit, del, getTeacherCourseMessage, getTeacherCourseToSeeStudent, getTeachersInfoByUserName, updateTeacherInfo, InsertTeacherInfo, getTeachersGrade }
