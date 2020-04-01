@@ -94,10 +94,11 @@ public class CommentInfoController {
     public ResponseEntity<Object> queryCommentByStudent(
             @RequestParam("class_id") String class_id,
             @RequestParam("teacher_name") String teacher_name,
-            @RequestParam("status") String status
+            @RequestParam("status") String status,
+            @RequestParam("username") String username
     ) {
 
-        return new ResponseEntity<>(commentInfoService.queryCommentByStudent(class_id, teacher_name, status),HttpStatus.OK);
+        return new ResponseEntity<>(commentInfoService.queryCommentByStudent(class_id, teacher_name, status,username),HttpStatus.OK);
     }
 
 

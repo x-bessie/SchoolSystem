@@ -80,5 +80,5 @@ public interface CommentInfoService {
      * @param teacher_name
      * @param status
      */
-    Object queryCommentByStudent(String class_id, String teacher_name, String status);
+    Object queryCommentByStudent(String class_id, String teacher_name, String status,String username);
 }
