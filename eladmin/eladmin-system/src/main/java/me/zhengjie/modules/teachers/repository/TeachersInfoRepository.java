@@ -65,4 +65,13 @@ public interface TeachersInfoRepository extends JpaRepository<TeachersInfo, Inte
     @Modifying
     @Query(value = "Insert ignore  into teachers_info(name,teacherid) values (?1,?2) ", nativeQuery = true)
     void InsertTeacherInfo(String name, String teacherid);
+
+    /**
+     * 查询教师个人评分
+     * @param username
+     * @return
+     */
+    @Query(value = "SELECT class_name, class_id, ROUND(AVG(memo),1) AS avg_memo FROM comment_info WHERE teacher_id = ?1 " +
+            "GROUP BY   class_name,class_id", nativeQuery = true)
+    List<Map<String, Object>> getTeachersGrade(String username);
 }
