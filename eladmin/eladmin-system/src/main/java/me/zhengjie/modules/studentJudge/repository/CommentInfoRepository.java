@@ -21,6 +21,6 @@ public interface CommentInfoRepository extends JpaRepository<CommentInfo, Intege
     @Query(value = "insert ignore into comment_info (username,class_id,teacher_name,teacher_id,memo,class_name,createtime) values (?1,?2,?3,?4,?5,?6,?7);", nativeQuery = true)
     void InsertCommentByStudent(String username, String class_id, String teacher_name, String teacher_id, String memo, String class_name, Date createtime);
 
-    @Query(value = "select * from comment_info  where class_id=?1 and teacher_name=?2 and status=?3 ", nativeQuery = true)
-    List<Map<String, Object>> queryCommentByStudent(String class_id, String teacher_name, String status);
+    @Query(value = "select * from comment_info  where class_id=?1 and teacher_name=?2 and status=?3 and username=?4 ", nativeQuery = true)
+    List<Map<String, Object>> queryCommentByStudent(String class_id, String teacher_name, String status,String username);
 }
