@@ -63,10 +63,10 @@
       </el-dialog>
       <!--表格渲染-->
       <el-table ref="table" :data="gradeStudentList" stripe size="small" style="width: 100%;">
-        <el-table-column prop="username" label="学号" width="180" />
-        <el-table-column prop="student_name" label="姓名" width="180" />
-        <el-table-column prop="name" label="课程名称" width="180" />
-        <el-table-column prop="class_code" label="课程代码" width="180" />
+        <el-table-column prop="username" label="学号" />
+        <el-table-column prop="student_name" label="姓名" />
+        <el-table-column prop="name" label="课程名称" />
+        <el-table-column prop="class_code" label="课程代码" />
         <!-- <el-table-column prop="grade" label="分数" width="180" /> -->
         <el-table-column label="操作">
           <template scope="scope">
