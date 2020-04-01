@@ -131,8 +131,8 @@ public class CommentInfoServiceImpl implements CommentInfoService {
      * @param status
      */
     @Override
-    public Object queryCommentByStudent(String class_id, String teacher_name, String status) {
-        List<Map<String, Object>> list = commentInfoRepository.queryCommentByStudent(class_id, teacher_name, status);
+    public Object queryCommentByStudent(String class_id, String teacher_name, String status,String username) {
+        List<Map<String, Object>> list = commentInfoRepository.queryCommentByStudent(class_id, teacher_name, status,username);
         if (list == null) {
             return "暂时本课程无成绩";
         }

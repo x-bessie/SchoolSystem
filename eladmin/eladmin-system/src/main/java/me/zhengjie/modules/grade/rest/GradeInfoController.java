@@ -135,4 +135,12 @@ public class GradeInfoController {
     ) {
         return new ResponseEntity<>(gradeInfoService.getCourseGradeByStudent(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/getTeacherCourseSelect")
+    @Log("查询课程清单")
+    @ApiOperation("查询课程清单")
+    public ResponseEntity<Object> getTeacherCourseSelect() {
+        return new ResponseEntity<>(gradeInfoService.getTeacherCourseSelect(), HttpStatus.OK);
+    }
+
 }

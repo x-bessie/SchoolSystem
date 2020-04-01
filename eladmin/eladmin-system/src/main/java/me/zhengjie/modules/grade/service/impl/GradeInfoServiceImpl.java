@@ -191,4 +191,16 @@ public class GradeInfoServiceImpl implements GradeInfoService {
         }
         return list;
     }
+
+
+    @Override
+    public Object getTeacherCourseSelect() {
+        String username = SecurityUtils.getUsername();
+
+        List<Map<String, Object>> list = gradeInfoRepository.getTeacherCourse(username);
+        if (list == null) {
+            return "暂时无本学期相关任课信息";
+        }
+        return list;
+    }
 }

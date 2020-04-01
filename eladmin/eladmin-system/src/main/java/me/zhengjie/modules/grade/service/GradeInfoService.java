@@ -111,4 +111,10 @@ public interface GradeInfoService {
     学生查询成绩
      */
     Object getCourseGradeByStudent();
+
+    /**
+     * 课程选择
+     * @return
+     */
+    Object getTeacherCourseSelect();
 }
