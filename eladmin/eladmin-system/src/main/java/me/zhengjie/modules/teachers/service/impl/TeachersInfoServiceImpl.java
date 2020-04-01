@@ -182,4 +182,21 @@ public class TeachersInfoServiceImpl implements TeachersInfoService {
         teachersInfoRepository.InsertTeacherInfo(name, teacherid);
 
     }
+
+    /**
+     * 查询教师个人评分
+     * @return
+     */
+    @Override
+    public Object getTeachersGrade() {
+        //获取当前用户名
+        String username = SecurityUtils.getUsername();
+
+        List<Map<String, Object>> list = teachersInfoRepository.getTeachersGrade(username);
+        if (list == null) {
+            return "暂时无教师个人评分";
+        }
+
+        return list;
+    }
 }
