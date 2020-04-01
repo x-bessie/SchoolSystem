@@ -120,4 +120,13 @@ public class TeachersInfoController {
         teachersInfoService.InsertTeacherInfo(name, teacherid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "/getTeachersGrade")
+    @Log("教师查询：教师个人评分")
+    @ApiOperation("教师查询：教师个人评分")
+    public ResponseEntity<Object> getTeachersGrade() {
+        return new ResponseEntity<>(teachersInfoService.getTeachersGrade(), HttpStatus.OK);
+    }
+
 }
