@@ -110,4 +110,6 @@ public interface TeachersInfoService {
      * @param teacherid
      */
     void InsertTeacherInfo(String name, String teacherid);
+
+    Object getTeachersGrade();
 }
